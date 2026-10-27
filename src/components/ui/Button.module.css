@@ -1,0 +1,172 @@
+/*
+ * 3D Liquid Glass buttons. No colour gradients: depth comes from a
+ * translucent fill, a bright top edge (light catching the rim), an inner
+ * shade at the bottom, a soft sheen on the upper half and a mild shadow
+ * tinted by the glass itself, as if light passed through it.
+ */
+.button {
+  --button-height: 3rem;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--button-height);
+  padding: 0 var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(160%);
+  box-shadow: var(--btn-shadow);
+  transition:
+    transform var(--duration-base) var(--ease-spring),
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+/* Sheen: a soft band of light across the upper half of the glass. */
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 1px 6% 52%;
+  z-index: -1;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.2);
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+/* Feedback lives on the press, and it is instant: the glass sinks. */
+.button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: var(--btn-shadow-pressed);
+  transition-duration: var(--duration-press);
+}
+
+.small {
+  --button-height: 2.5rem;
+  padding: 0 var(--space-4);
+  font-size: var(--text-xs);
+}
+
+.large {
+  --button-height: 3.25rem;
+  padding: 0 var(--space-6);
+  font-size: var(--text-md);
+}
+
+/* ── Primary: blue glass ────────────────────────────────── */
+
+.primary {
+  --btn-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -3px 6px rgb(6 17 43 / 0.28),
+    0 1px 2px rgb(29 78 216 / 0.3), 0 12px 26px -10px rgb(29 78 216 / 0.6);
+  --btn-shadow-pressed:
+    inset 0 1px 0 rgb(255 255 255 / 0.35), inset 0 -1px 3px rgb(6 17 43 / 0.3),
+    0 4px 10px -6px rgb(29 78 216 / 0.5);
+  background-color: rgb(29 78 216 / 0.88);
+  border-color: rgb(255 255 255 / 0.3);
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgb(6 17 43 / 0.25);
+}
+
+.primary:hover {
+  --btn-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.55), inset 0 -3px 6px rgb(6 17 43 / 0.3),
+    0 2px 4px rgb(29 78 216 / 0.3), 0 18px 34px -12px rgb(29 78 216 / 0.65);
+  background-color: rgb(30 64 175 / 0.9);
+}
+
+/* A band of light sweeps across on hover. */
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.3) 50%, transparent 70%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .primary::after {
+    transition: transform 0.7s var(--ease-out);
+  }
+
+  .primary:hover::after {
+    transform: translateX(120%);
+  }
+}
+
+/* ── Secondary: clear frosted glass ─────────────────────── */
+
+.secondary {
+  --btn-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.85), inset 0 -2px 5px rgb(58 46 30 / 0.08),
+    0 0 0 1px rgb(58 46 30 / 0.1), 0 10px 22px -12px rgb(58 46 30 / 0.4);
+  --btn-shadow-pressed:
+    inset 0 1px 0 rgb(255 255 255 / 0.6), inset 0 -1px 3px rgb(58 46 30 / 0.1),
+    0 0 0 1px rgb(58 46 30 / 0.12), 0 4px 10px -6px rgb(58 46 30 / 0.35);
+  background-color: rgb(251 248 242 / 0.45);
+  border-color: rgb(255 255 255 / 0.65);
+  color: var(--color-ink);
+}
+
+.secondary:hover {
+  background-color: rgb(251 248 242 / 0.72);
+}
+
+.icon {
+  width: 0.875em;
+  height: 0.875em;
+  flex: none;
+}
+
+/* ── Fallbacks ──────────────────────────────────────────── */
+
+@media (prefers-reduced-transparency: reduce) {
+  .button {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .primary {
+    background-color: var(--blue-700);
+  }
+
+  .secondary {
+    background-color: var(--color-surface);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:hover,
+  .button:active {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .button {
+    border-color: ButtonText;
+  }
+
+  .button::before {
+    display: none;
+  }
+}

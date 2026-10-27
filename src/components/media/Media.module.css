@@ -1,0 +1,105 @@
+/* ── Framed photograph ──────────────────────────────────── */
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
+  isolation: isolate;
+}
+
+.image {
+  object-fit: cover;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The frame opens from an inset as it enters the viewport. */
+    .frame {
+      animation: unveil linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+
+    /* The photo drifts against the scroll for depth. */
+    .image {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+@keyframes unveil {
+  from {
+    clip-path: inset(8% 6% round var(--radius-lg));
+  }
+  to {
+    clip-path: inset(0 round var(--radius-lg));
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(-5%) scale(1.12);
+  }
+  to {
+    transform: translateY(5%) scale(1.12);
+  }
+}
+
+/* ── Pointer tilt ───────────────────────────────────────── */
+
+.tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.glint {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--glint-x, 50%) var(--glint-y, 50%),
+    rgb(255 255 255 / 0.28),
+    transparent 55%
+  );
+  opacity: var(--glint-opacity, 0);
+  mix-blend-mode: soft-light;
+}
+
+/* ── Glass badge (sits on photographs) ──────────────────── */
+
+.badge {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 1px solid var(--glass-edge);
+  background: var(--glass-tint-strong);
+  color: var(--teal-800);
+  box-shadow: var(--glass-highlight), var(--shadow-md);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
+}
+
+.badge svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .badge {
+    background: var(--color-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

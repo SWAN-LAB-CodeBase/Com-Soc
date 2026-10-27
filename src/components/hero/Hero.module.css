@@ -1,0 +1,549 @@
+/*
+ * Hero: editorial copy on Sand Beige, with a full-bleed photograph that
+ * dissolves into the page from the right. The photo carries live network
+ * links; a glass facts bar floats across the bottom.
+ */
+
+.hero {
+  --color-bg: var(--tint-hero);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* Two soft signal glows behind the copy; they drift as the page scrolls. */
+.aurora {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  width: 46rem;
+  height: 46rem;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+}
+
+.aurora::before {
+  left: -14rem;
+  top: -10rem;
+  background: radial-gradient(circle, rgb(13 138 128 / 0.18), transparent 65%);
+}
+
+.aurora::after {
+  left: 12rem;
+  bottom: -22rem;
+  background: radial-gradient(circle, rgb(96 165 250 / 0.16), transparent 65%);
+}
+
+/* ── Photograph ─────────────────────────────────────────── */
+
+.media {
+  position: relative;
+  height: clamp(20rem, 58svh, 34rem);
+  overflow: hidden;
+}
+
+/*
+ * The photo dissolves into the page through a Sand overlay rather than a
+ * CSS mask: identical on a solid background, cheaper to composite, and free
+ * of the seam masks produce over transformed layers.
+ */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 50%, var(--color-bg));
+}
+
+.scrollLayer,
+.pointerArea,
+.pointerLayer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Slight overscan so pointer and scroll parallax never reveal an edge. */
+.pointerLayer {
+  inset: -3%;
+  will-change: transform;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* A warm, matte grade settles the photo into the sand palette. */
+.wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgb(235 210 170 / 0.3);
+  mix-blend-mode: soft-light;
+}
+
+/* ── Network overlay ────────────────────────────────────── */
+
+.network {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.link,
+.linkGlow {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.link {
+  stroke: #ffffff;
+  stroke-width: 2.5;
+  stroke-opacity: 0.95;
+}
+
+.linkGlow {
+  stroke: var(--blue-400);
+  stroke-width: 12;
+  stroke-opacity: 0.22;
+}
+
+.nodeHalo {
+  fill: var(--blue-300);
+  fill-opacity: 0.28;
+}
+
+.towerHalo {
+  fill: var(--blue-300);
+  fill-opacity: 0.2;
+  stroke: #ffffff;
+  stroke-opacity: 0.8;
+  stroke-width: 1.5;
+}
+
+.nodeCore {
+  fill: #ffffff;
+}
+
+.wave {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.packet {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 6px var(--blue-400));
+}
+
+/* ── Copy ───────────────────────────────────────────────── */
+
+.inner {
+  position: relative;
+  display: grid;
+  gap: var(--space-7);
+  max-width: var(--width-wide);
+  margin: calc(-1 * var(--space-8)) auto 0;
+  padding: 0 var(--gutter) var(--space-8);
+}
+
+.copy {
+  max-width: 40rem;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.title {
+  font-size: var(--text-hero);
+  font-weight: 700;
+  letter-spacing: var(--tracking-hero);
+  line-height: 0.96;
+}
+
+.line {
+  display: block;
+}
+
+/* "last mile." in solid dark teal. */
+.accent {
+  color: var(--teal-800);
+}
+
+.lede {
+  max-width: 36rem;
+  margin-top: var(--space-5);
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  letter-spacing: -0.008em;
+}
+
+.audience {
+  max-width: 34rem;
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.ctas {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform var(--duration-spring) var(--ease-spring);
+}
+
+.primary:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ── Facts: a Liquid Glass bar ──────────────────────────── */
+
+.facts {
+  display: grid;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-edge);
+  background: var(--glass-tint-strong);
+  box-shadow: var(--glass-highlight), var(--shadow-md);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+}
+
+.facts > div {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+}
+
+.facts > div + div {
+  border-top: 1px solid var(--color-line);
+}
+
+.facts dt {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.facts dd {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.35;
+}
+
+.factNote {
+  display: block;
+  margin-top: 0.15rem;
+  font-weight: 400;
+  color: var(--color-ink-muted);
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+
+@media (min-width: 40em) {
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .ctas > a {
+    min-width: 13rem;
+  }
+}
+
+@media (min-width: 48em) {
+  .facts {
+    grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+  }
+
+  .facts > div + div {
+    border-top: 0;
+    border-left: 1px solid var(--color-line);
+  }
+}
+
+@media (min-width: 64em) {
+  .hero {
+    display: grid;
+    min-height: min(100svh, 64rem);
+  }
+
+  /* The photo fills the right of the hero and dissolves leftward into Sand. */
+  .media {
+    position: absolute;
+    inset: 0 0 0 36%;
+    height: auto;
+  }
+
+  .media::after {
+    background:
+      linear-gradient(to right, var(--color-bg) 0%, rgb(245 240 230 / 0.65) 22%, transparent 48%),
+      linear-gradient(to bottom, transparent 80%, var(--color-bg));
+  }
+
+  .inner {
+    width: 100%;
+    margin-top: 0;
+    padding-top: calc(var(--header-offset) + var(--space-8));
+    padding-bottom: var(--space-6);
+    grid-template-rows: 1fr auto;
+    align-content: stretch;
+  }
+
+  .copy {
+    align-self: center;
+    max-width: 36rem;
+  }
+}
+
+@media (min-width: 80em) {
+  .copy {
+    max-width: 40rem;
+  }
+}
+
+/* ── Motion ─────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The photo settles in on load (scale only, so it never delays paint). */
+  .photo {
+    animation: settle-in 1.6s var(--ease-out) both;
+  }
+
+  /* Links draw outward from the tower, then nodes light up. */
+  .link,
+  .linkGlow {
+    stroke-dasharray: 1;
+    animation: draw 1.4s var(--ease-out) 0.6s both;
+  }
+
+  .nodeHalo,
+  .towerHalo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pop 0.8s var(--ease-spring) 1.6s both;
+  }
+
+  /* Copy rises into place in sequence; transform only, no opacity, so the
+   * text paints immediately. */
+  .eyebrow,
+  .title,
+  .lede,
+  .audience,
+  .ctas {
+    animation: rise 0.9s var(--ease-spring) both;
+  }
+
+  .title {
+    animation-delay: 60ms;
+  }
+
+  .lede {
+    animation-delay: 140ms;
+  }
+
+  .audience {
+    animation-delay: 200ms;
+  }
+
+  .ctas {
+    animation-delay: 260ms;
+  }
+
+  .wave {
+    animation: radio 3.6s ease-out infinite;
+  }
+
+  .wave:nth-child(2) {
+    animation-delay: 1.2s;
+  }
+
+  .wave:nth-child(3) {
+    animation-delay: 2.4s;
+  }
+
+  /* A soft pulse invites the main action. */
+  .primary {
+    animation: cta-pulse 2.8s ease-out 1.5s infinite;
+  }
+
+  /* As the page scrolls, the photo drifts and deepens and the glows travel
+   * (scroll-driven, no JS). */
+  @supports (animation-timeline: scroll()) {
+    .scrollLayer {
+      animation: drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+
+    .aurora::before,
+    .aurora::after {
+      animation: aurora linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+
+    .aurora::after {
+      animation-direction: reverse;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    /* The facts bar floats up toward the reader as the page starts to scroll. */
+    .facts {
+      animation: facts-lift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 60vh;
+    }
+  }
+}
+
+@keyframes facts-lift {
+  to {
+    transform: translateY(-1.5rem);
+    box-shadow: var(--glass-highlight), var(--shadow-lg);
+  }
+}
+
+/* Desktop only: on phones the copy sits below the photo and is still being read. */
+@media (min-width: 64em) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .copy {
+      animation: copy-out linear both;
+      animation-timeline: scroll(root);
+      animation-range: 10vh 80vh;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .packet {
+    display: none;
+  }
+}
+
+@keyframes settle-in {
+  from {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(1.25rem);
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translateY(14%) scale(1.06);
+  }
+}
+
+@keyframes radio {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(5.5);
+  }
+}
+
+@keyframes cta-pulse {
+  0% {
+    box-shadow:
+      var(--btn-shadow),
+      0 0 0 0 rgb(29 78 216 / 0.4);
+  }
+  70%,
+  100% {
+    box-shadow:
+      var(--btn-shadow),
+      0 0 0 16px rgb(29 78 216 / 0);
+  }
+}
+
+@keyframes aurora {
+  to {
+    transform: translate(10rem, 6rem) scale(1.2);
+  }
+}
+
+@keyframes copy-out {
+  to {
+    opacity: 0.2;
+    transform: translateY(-3rem);
+  }
+}
+
+/* ── Material fallbacks ─────────────────────────────────── */
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .facts {
+    background: var(--color-surface);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .facts {
+    background: var(--color-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

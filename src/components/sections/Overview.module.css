@@ -1,0 +1,558 @@
+.section {
+  padding: var(--section-pad) var(--gutter);
+  background: var(--color-bg);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-8);
+  max-width: var(--width-content);
+  margin: 0 auto;
+}
+
+.principles {
+  display: grid;
+  border-top: 1px solid var(--color-line-strong);
+}
+
+/* Each principle: a coloured icon tile, a coloured title, alternating
+ * blue and teal down the list. */
+.principle {
+  --tone: var(--blue-700);
+  --tone-soft: var(--blue-100);
+  position: relative;
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-5) var(--space-3) var(--space-5) calc(3rem + var(--space-3) + var(--space-4));
+  border-bottom: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--duration-spring) var(--ease-spring),
+    background-color var(--duration-base) var(--ease-out);
+}
+
+.principle[data-tone="teal"] {
+  --tone: var(--teal-700);
+  --tone-soft: var(--teal-100);
+}
+
+.principle:hover {
+  transform: translateX(6px);
+  background: color-mix(in srgb, var(--tone-soft) 55%, transparent);
+}
+
+.icon {
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-5);
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.875rem;
+  background: var(--tone-soft);
+  color: var(--tone);
+  transition: transform var(--duration-spring) var(--ease-spring);
+}
+
+.icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.principle:hover .icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.principles dt {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.15;
+  color: var(--tone);
+}
+
+.principles dd {
+  color: var(--color-ink-muted);
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-5);
+}
+
+.figures li {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+}
+
+.figure {
+  color: var(--blue-700);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Alternate blue and teal across the four figures. */
+.figures li:nth-child(even) .figure {
+  color: var(--teal-800);
+}
+
+.figureLabel {
+  max-width: 14rem;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.audiences {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.tilt {
+  border-radius: var(--radius-lg);
+}
+
+/*
+ * Glass cards: the photo fills the card and the text sits on a frosted,
+ * matte glass pane inset over it. Matte = low-shine translucent fill,
+ * the page's paper grain, a fine bright rim and a soft warm shadow.
+ * Text is full-strength ink: ≥ 7:1 even over the photo's darkest areas.
+ */
+.audience {
+  --pane: rgb(248 245 238 / 0.5);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  min-height: 30rem;
+  padding: var(--space-3);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  color: var(--ink-light);
+  box-shadow: var(--shadow-md);
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-spring) var(--ease-spring);
+}
+
+/* A hint of each card's colour in the glass. */
+.audience[data-variant="blue"] {
+  --pane: rgb(225 231 238 / 0.52);
+}
+
+.audience[data-variant="teal"] {
+  --pane: rgb(220 232 227 / 0.52);
+}
+
+.tilt:hover .audience {
+  box-shadow: 0 28px 56px -22px rgb(58 46 30 / 0.45);
+}
+
+.cardPhoto {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.cardPhoto img {
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+}
+
+.tilt:hover .cardPhoto img {
+  transform: scale(1.07);
+}
+
+/*
+ * Curtain: by default only the photo shows. On hover (or keyboard focus)
+ * a translucent matte glass curtain slides down from the top, covering
+ * the image only, with the text on it. Touch screens and reduced motion
+ * show the curtain down, so the text is always reachable.
+ */
+.panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--space-6);
+  background: var(--pane);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+
+/* The curtain falls like cloth: the hem drops with a wave, overshoots,
+ * swings back and settles, while soft folds fade out of the fabric. */
+@media (hover: hover) and (pointer: fine) {
+  .panel {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% -8%,
+      93.75% -8%,
+      87.5% -8%,
+      81.25% -8%,
+      75% -8%,
+      68.75% -8%,
+      62.5% -8%,
+      56.25% -8%,
+      50% -8%,
+      43.75% -8%,
+      37.5% -8%,
+      31.25% -8%,
+      25% -8%,
+      18.75% -8%,
+      12.5% -8%,
+      6.25% -8%,
+      0% -8%
+    );
+    transform-origin: top center;
+    transition: clip-path 0.9s var(--ease-out);
+  }
+
+  .panel > * {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    transition:
+      opacity 0.3s var(--ease-out),
+      transform 0.5s var(--ease-spring);
+  }
+
+  /* Folds in the fabric. */
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      90deg,
+      rgb(58 46 30 / 0) 0,
+      rgb(58 46 30 / 0.07) 3.5%,
+      rgb(255 255 255 / 0.12) 7%,
+      rgb(58 46 30 / 0) 10.5%
+    );
+    opacity: 0;
+  }
+
+  .tilt:hover .panel,
+  .audience:focus-within .panel {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 110%,
+      93.75% 110%,
+      87.5% 110%,
+      81.25% 110%,
+      75% 110%,
+      68.75% 110%,
+      62.5% 110%,
+      56.25% 110%,
+      50% 110%,
+      43.75% 110%,
+      37.5% 110%,
+      31.25% 110%,
+      25% 110%,
+      18.75% 110%,
+      12.5% 110%,
+      6.25% 110%,
+      0% 110%
+    );
+    animation:
+      cloth-drop 1.8s ease-out both,
+      cloth-sway 1.8s ease-out both;
+  }
+
+  .tilt:hover .panel::before,
+  .audience:focus-within .panel::before {
+    animation: cloth-folds 2.1s ease-out both;
+  }
+
+  .tilt:hover .panel > *,
+  .audience:focus-within .panel > * {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.75s;
+  }
+}
+
+@keyframes cloth-drop {
+  0% {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% -8%,
+      93.75% -6.33%,
+      87.5% -5.23%,
+      81.25% -5.06%,
+      75% -5.88%,
+      68.75% -7.41%,
+      62.5% -9.15%,
+      56.25% -10.49%,
+      50% -11%,
+      43.75% -10.49%,
+      37.5% -9.15%,
+      31.25% -7.41%,
+      25% -5.88%,
+      18.75% -5.06%,
+      12.5% -5.23%,
+      6.25% -6.33%,
+      0% -8%
+    );
+  }
+  42% {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 98.05%,
+      93.75% 101.92%,
+      87.5% 105.83%,
+      81.25% 108.44%,
+      75% 108.88%,
+      68.75% 107%,
+      62.5% 103.44%,
+      56.25% 99.39%,
+      50% 96.22%,
+      43.75% 95%,
+      37.5% 96.14%,
+      31.25% 99.25%,
+      25% 103.29%,
+      18.75% 106.9%,
+      12.5% 108.85%,
+      6.25% 108.5%,
+      0% 105.95%
+    );
+  }
+  60% {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 88.96%,
+      93.75% 88%,
+      87.5% 88.73%,
+      81.25% 90.9%,
+      75% 93.78%,
+      68.75% 96.39%,
+      62.5% 97.86%,
+      56.25% 97.69%,
+      50% 95.94%,
+      43.75% 93.2%,
+      37.5% 90.39%,
+      31.25% 88.46%,
+      25% 88.06%,
+      18.75% 89.33%,
+      12.5% 91.83%,
+      6.25% 94.73%,
+      0% 97.04%
+    );
+  }
+  76% {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 102.33%,
+      93.75% 100.61%,
+      87.5% 99.02%,
+      81.25% 98.1%,
+      75% 98.16%,
+      68.75% 99.17%,
+      62.5% 100.8%,
+      56.25% 102.5%,
+      50% 103.69%,
+      43.75% 103.97%,
+      37.5% 103.26%,
+      31.25% 101.78%,
+      25% 100.04%,
+      18.75% 98.62%,
+      12.5% 98.01%,
+      6.25% 98.4%,
+      0% 99.67%
+    );
+  }
+  89% {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 99.65%,
+      93.75% 99.65%,
+      87.5% 99.25%,
+      81.25% 98.61%,
+      75% 97.93%,
+      68.75% 97.44%,
+      62.5% 97.31%,
+      56.25% 97.58%,
+      50% 98.16%,
+      43.75% 98.86%,
+      37.5% 99.43%,
+      31.25% 99.7%,
+      25% 99.55%,
+      18.75% 99.06%,
+      12.5% 98.37%,
+      6.25% 97.73%,
+      0% 97.35%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 110%,
+      93.75% 110%,
+      87.5% 110%,
+      81.25% 110%,
+      75% 110%,
+      68.75% 110%,
+      62.5% 110%,
+      56.25% 110%,
+      50% 110%,
+      43.75% 110%,
+      37.5% 110%,
+      31.25% 110%,
+      25% 110%,
+      18.75% 110%,
+      12.5% 110%,
+      6.25% 110%,
+      0% 110%
+    );
+  }
+}
+
+@keyframes cloth-sway {
+  0% {
+    transform: skewX(0deg);
+  }
+  40% {
+    transform: skewX(-1.6deg);
+  }
+  62% {
+    transform: skewX(1deg);
+  }
+  80% {
+    transform: skewX(-0.4deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes cloth-folds {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .panel > * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Matte grain on the glass itself. */
+.panel::after {
+  content: "";
+  opacity: 0.12 !important;
+  transform: none !important;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+}
+
+.audience h3 {
+  color: var(--teal-800);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.15;
+}
+
+.audience p {
+  margin-top: var(--space-2);
+  max-width: 32rem;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .panel {
+    background: rgb(248 245 238 / 0.95);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .panel {
+    background: var(--color-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.more {
+  color: var(--teal-800);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 2.75rem;
+  margin-top: var(--space-4);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.more::after {
+  content: "→";
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.more:hover::after {
+  transform: translateX(3px);
+}
+
+@media (min-width: 48em) {
+  .figures {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .audiences {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .principles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+}
+
+.lead {
+  display: grid;
+  gap: var(--space-8);
+}
+
+/* Heading and principles sit side by side and scroll together. No pinning:
+ * the two columns are about the same height, so a sticky heading gained
+ * nothing and risked overlapping the rows below. */
+@media (min-width: 64em) {
+  .lead {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    column-gap: var(--space-8);
+    align-items: start;
+  }
+
+  .principles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,69 +1,72 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { event } from "@/content/event";
+import { navigation } from "@/content/navigation";
+import { siteConfig } from "@/lib/site-config";
+import { SiteHeader } from "@/components/header/SiteHeader";
+import { Hero } from "@/components/hero/Hero";
+import { Overview } from "@/components/sections/Overview";
+import { PhotoBand } from "@/components/sections/PhotoBand";
+import { Tracks } from "@/components/sections/Tracks";
+import { Ideathon } from "@/components/sections/Ideathon";
+import { Register } from "@/components/sections/Register";
+import { Programme } from "@/components/sections/Programme";
+import { Organisers } from "@/components/sections/Organisers";
+import { Faq } from "@/components/sections/Faq";
+import { SiteFooter } from "@/components/footer/SiteFooter";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <SiteHeader nav={navigation} applyHref="#apply" attendHref="#attend" />
+      <main id="main" tabIndex={-1}>
+        <Hero />
+        <Overview />
+        <PhotoBand />
+        <Tracks />
+        <Ideathon />
+        <Register />
+        <Programme />
+        <Organisers />
+        <Faq />
       </main>
-    </div>
+      <SiteFooter nav={navigation} />
+      <EventStructuredData />
+    </>
+  );
+}
+
+/**
+ * schema.org Event markup, emitted only when every required fact (dates,
+ * venue and a production URL) is confirmed — never with placeholder data.
+ */
+function EventStructuredData() {
+  const { dates, venue, identity } = event;
+  if (dates.status !== "confirmed" || venue.status !== "confirmed" || !siteConfig.siteUrl) {
+    return null;
+  }
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: identity.name,
+    description: identity.description,
+    startDate: dates.value.start,
+    endDate: dates.value.end,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    url: siteConfig.siteUrl.href,
+    location: {
+      "@type": "Place",
+      name: venue.value.name,
+      address: venue.value.address ?? venue.value.city,
+    },
+    organizer: event.organizers.map((p) => ({ "@type": "Person", name: p.name })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      // JSON.stringify output with "<" escaped cannot break out of the script element.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
   );
 }

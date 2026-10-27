@@ -1,49 +1,488 @@
+/*
+ * RuralConnect 2026 — design tokens and base styles.
+ *
+ * Palette: matte sand and ivory backgrounds with solid blue and deep teal
+ * accents, no colour gradients, and a faint paper grain for a matte finish. Blue marks actions and emphasis
+ * (buttons, accent text, selection); teal marks markers and data (numbers,
+ * steps, tags). Each section sits on its
+ * own tint; components use only the semantic tokens below. Every pairing is
+ * checked in tests/unit/contrast.test.ts.
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Raw palette ───────────────────────────────────── */
+  --navy-950: #06112b;
+  --navy-700: #1b3f8f;
+  --blue-800: #1e40af;
+  --blue-700: #1d4ed8;
+  --blue-400: #60a5fa;
+  --blue-100: #e1e7ee; /* dusty blue: sits with the warm sand */
+  --teal-700: #0b6e66;
+  --teal-900: #134e4a;
+  --teal-800: #115e59;
+  --teal-600: #0d8a80; /* graphics only: 3.8:1 */
+  --teal-100: #dce8e3; /* soft sage-teal */
+  --blue-500: #3b82f6;
+  --blue-300: #93c5fd;
+  --ink-light: #0a1735;
+  --ink-light-muted: #44506b;
+  --ink-dark: #eef4ff; /* text on photographs */
+
+  /* Section backgrounds: a matte sand family, one shade per section. */
+  --tint-hero: #f5f0e6;
+  --tint-sand: #f1eade;
+  --tint-linen: #f7f2ea;
+  --tint-oat: #f2ece2;
+  --tint-dune: #efe8dc;
+  --tint-parchment: #f7f3ec;
+
+  /* ── Semantic tokens ───────────────────────────────── */
+  --color-bg: #f8f5ee; /* ivory */
+  --color-bg-alt: var(--tint-linen);
+  --color-surface: #fbf8f2; /* warm white for cards */
+  --color-ink: var(--ink-light);
+  --color-ink-muted: var(--ink-light-muted);
+  --color-accent: var(--blue-700); /* ≥ 4.8:1 on every tint */
+  --color-on-accent: #ffffff; /* text on teal fills: 6.1:1 */
+  --color-cta-bg: var(--blue-700);
+  --color-cta-ink: #ffffff;
+  --color-cta-hover: var(--blue-800);
+  --color-line: rgb(10 23 53 / 0.12);
+  --color-line-strong: rgb(10 23 53 / 0.28);
+  --color-focus: var(--blue-700);
+  --color-success: #13795b;
+
+  /* Paper grain: the matte finish, shared by the page and glass panes. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* ── Liquid Glass materials ────────────────────────── */
+  --glass-tint: rgb(251 248 242 / 0.5);
+  --glass-tint-strong: rgb(251 248 242 / 0.74);
+  --glass-edge: rgb(255 255 255 / 0.55);
+  --glass-highlight: inset 0 1px 0 rgb(255 255 255 / 0.7), inset 0 -1px 0 rgb(58 46 30 / 0.06);
+  --glass-blur-sm: blur(14px) saturate(160%);
+  --glass-blur-md: blur(24px) saturate(170%);
+
+  /* ── Typography ────────────────────────────────────── */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --text-xs: 0.8125rem; /* 13 */
+  --text-sm: 0.9375rem; /* 15 */
+  --text-md: 1.0625rem; /* 17 — body */
+  --text-lg: clamp(1.1875rem, 1.05rem + 0.5vw, 1.375rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --text-3xl: clamp(2.5rem, 1.6rem + 4vw, 4.75rem);
+  --text-hero: clamp(3rem, 1.6rem + 6.2vw, 7rem);
+
+  /* Tracking tightens as size grows; body stays near zero. */
+  --tracking-hero: -0.035em;
+  --tracking-display: -0.025em;
+  --tracking-heading: -0.015em;
+  --tracking-body: -0.003em;
+  --tracking-caps: 0.08em;
+
+  /* ── Spacing (rem so it scales with user text size) ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --section-pad: clamp(4.5rem, 3rem + 7vw, 9rem);
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+
+  /* ── Widths ────────────────────────────────────────── */
+  --width-text: 40rem;
+  --width-content: 72rem;
+  --width-wide: 84rem;
+
+  /* ── Radii ─────────────────────────────────────────── */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 999px;
+
+  /* ── Shadows ───────────────────────────────────────── */
+  /* Warm, soft shadows suit the matte sand surfaces. */
+  --shadow-sm: 0 1px 2px rgb(58 46 30 / 0.07), 0 2px 8px rgb(58 46 30 / 0.05);
+  --shadow-md: 0 2px 6px rgb(58 46 30 / 0.07), 0 14px 34px -6px rgb(58 46 30 / 0.14);
+  --shadow-lg: 0 4px 12px rgb(58 46 30 / 0.1), 0 30px 64px -10px rgb(58 46 30 / 0.22);
+
+  /* ── Motion ────────────────────────────────────────── */
+  --duration-press: 100ms;
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-spring: 600ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Fallback for the spring curve below. */
+  --ease-spring: cubic-bezier(0.2, 0.9, 0.3, 1);
+
+  /* ── Breakpoints (reference only; CSS media queries cannot read vars) ──
+   * sm 40em (640px) · md 48em (768px) · lg 64em (1024px) · xl 80em (1280px)
+   */
+
+  --header-offset: 5.5rem;
+
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Critically damped spring (damping 1.0, response 0.4s), sampled over 600ms. */
+@supports (transition-timing-function: linear(0, 1)) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --ease-spring: linear(
+      0,
+      0.06,
+      0.186,
+      0.329,
+      0.466,
+      0.584,
+      0.682,
+      0.76,
+      0.821,
+      0.868,
+      0.903,
+      0.929,
+      0.949,
+      0.963,
+      0.973,
+      0.981,
+      0.986,
+      0.99,
+      0.993,
+      0.995,
+      0.997,
+      0.998,
+      0.999,
+      1
+    );
   }
 }
 
+/* ── Base ───────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
-  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: var(--header-offset);
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.55;
+  letter-spacing: var(--tracking-body);
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+h1,
+h2,
+h3,
+h4,
+p,
+ol,
+ul,
+dl,
+dd,
+figure {
   margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
   color: inherit;
-  text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/*
+ * Matte finish: a faint, static paper grain over the whole page. It is a
+ * fixed layer, so it costs one composite and never repaints on scroll.
+ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  background-image: var(--grain);
+}
+
+@media (prefers-contrast: more) {
+  body::after {
+    display: none;
+  }
+}
+
+/* Slide-in reveals start off to the side; never let that widen the page. */
+main > section,
+main > figure {
+  overflow-x: clip;
+}
+
+/* The skip link focuses <main>; it is a target, not a control. */
+main:focus {
+  outline: none;
+}
+
+::selection {
+  background: var(--teal-100);
+  color: var(--ink-light);
+}
+
+/* ── Utilities ──────────────────────────────────────────── */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--blue-700);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline-color: var(--teal-800);
+}
+
+/*
+ * Scroll-driven reveals. Pure CSS progressive enhancement: content is always
+ * visible when the browser lacks scroll timelines or the user prefers
+ * reduced motion, so nothing depends on JavaScript to appear.
+ *   data-reveal         rise and fade in (default)
+ *   data-reveal="left"  slide in from the left
+ *   data-reveal="right" slide in from the right
+ *   data-reveal="scale" grow into place
+ *   data-reveal="flip"  tip up from a 3D tilt
+ *   data-reveal="spin"  spin and grow into place
+ *   data-reveal="grow"  extend from the left (bars)
+ * Set style={stagger(n)} on siblings to reveal them one after another.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* --i staggers siblings: each one starts a little further into view. */
+    [data-reveal] {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry calc(5% + var(--i, 0) * 7%) entry calc(45% + var(--i, 0) * 7%);
+    }
+
+    [data-reveal="left"] {
+      animation-name: reveal-left;
+    }
+
+    [data-reveal="right"] {
+      animation-name: reveal-right;
+    }
+
+    [data-reveal="scale"] {
+      animation-name: reveal-scale;
+    }
+
+    [data-reveal="flip"] {
+      animation-name: reveal-flip;
+    }
+
+    [data-reveal="spin"] {
+      animation-name: reveal-spin;
+    }
+
+    [data-reveal="grow"] {
+      transform-origin: left center;
+      animation-name: reveal-grow;
+    }
+
+    /* Reading progress: a signal bar that fills as the page scrolls. */
+    .scroll-progress {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 60;
+      height: 3px;
+      background: var(--blue-700);
+      box-shadow: 0 0 10px rgb(59 130 246 / 0.45);
+      transform-origin: left;
+      pointer-events: none;
+      animation: progress linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+/* Hidden where scroll timelines are unsupported or motion is reduced. */
+.scroll-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      display: block;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-flip {
+  from {
+    opacity: 0;
+    transform: perspective(900px) rotateX(24deg) translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-spin {
+  from {
+    opacity: 0;
+    transform: rotate(-140deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

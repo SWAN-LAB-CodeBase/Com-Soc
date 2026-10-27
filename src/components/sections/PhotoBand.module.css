@@ -1,0 +1,195 @@
+/* No gap below: the photo dissolves straight into the Tracks section. */
+.band {
+  position: relative;
+  z-index: 2;
+  overflow-x: clip; /* the seam glows may spill down, never sideways */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, var(--color-bg), var(--tint-sand));
+  view-timeline: --band block;
+}
+
+.frame {
+  position: relative;
+  height: clamp(26rem, 78svh, 48rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.seam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -9rem;
+  height: 18rem;
+  pointer-events: none;
+  background:
+    radial-gradient(24rem 9rem at 20% 50%, rgb(29 78 216 / 0.14), transparent 70%),
+    radial-gradient(26rem 9rem at 55% 55%, rgb(11 110 102 / 0.14), transparent 70%),
+    radial-gradient(22rem 8rem at 88% 45%, rgb(96 165 250 / 0.16), transparent 70%);
+  filter: blur(18px);
+}
+
+/* Darkens the band behind the caption so white text keeps ≥ 4.5:1 against
+ * even the brightest sky, then lets the bottom smudge into the next section. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      transparent 0%,
+      rgb(6 17 43 / 0.78) 24%,
+      rgb(10 30 74 / 0.32) 55%,
+      transparent 78%
+    ),
+    linear-gradient(to right, rgb(6 17 43 / 0.45), transparent 60%);
+}
+
+/* Soft fade into the Tracks section's tint. */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 26%;
+  background: linear-gradient(to bottom, transparent, var(--tint-sand));
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(6rem, 16vw, 11rem);
+  z-index: 1;
+  display: grid;
+  max-width: var(--width-content);
+  margin-inline: auto;
+  color: var(--ink-dark);
+}
+
+.kicker {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue-300);
+}
+
+.line {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Inset card → full bleed as the band enters. */
+    .frame {
+      animation: expand linear both;
+      animation-timeline: --band;
+      animation-range: entry 0% cover 45%;
+    }
+
+    /* The seam glows slide sideways and swell as the band leaves. */
+    .seam {
+      animation: seam-drift linear both;
+      animation-timeline: --band;
+      animation-range: cover 30% exit 100%;
+    }
+
+    /* Slow parallax drift across the whole pass. */
+    .image {
+      animation: drift linear both;
+      animation-timeline: --band;
+      animation-range: cover;
+    }
+
+    .kicker,
+    .line {
+      animation: rise linear both;
+      animation-timeline: --band;
+      animation-range: entry 40% cover 45%;
+    }
+
+    .line:nth-child(2) {
+      animation-name: from-left;
+      animation-range: entry 50% cover 50%;
+    }
+
+    .line:nth-child(3) {
+      animation-name: from-right;
+      animation-range: entry 60% cover 55%;
+    }
+  }
+}
+
+@keyframes expand {
+  from {
+    clip-path: inset(6% max(var(--gutter), 8%) 0 round var(--radius-lg) var(--radius-lg) 0 0);
+  }
+  to {
+    clip-path: inset(0 0 round 0);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(-6%) scale(1.15);
+  }
+  to {
+    transform: translateY(6%) scale(1.15);
+  }
+}
+
+@keyframes seam-drift {
+  from {
+    opacity: 0.5;
+    transform: translateX(-8%) scaleY(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(8%) scaleY(1.15);
+  }
+}
+
+@keyframes from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-4rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes from-right {
+  from {
+    opacity: 0;
+    transform: translateX(4rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
