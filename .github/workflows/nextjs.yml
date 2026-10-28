@@ -2,14 +2,15 @@ name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -29,7 +30,7 @@ jobs:
           node-version: "22.12.0"
           cache: npm
 
-      - name: Setup GitHub Pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Restore Next.js cache
@@ -41,15 +42,16 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Build static site
+      - name: Build Next.js site
         run: npm run build
 
       - name: Verify static export
         run: |
           if [ ! -f out/index.html ]; then
-            echo "::error::out/index.html was not generated. Check your Next.js static export configuration."
+            echo "::error::Static export failed: out/index.html was not generated."
+            echo "Check that next.config.ts or next.config.js includes output: 'export'."
             exit 1
           fi
 
