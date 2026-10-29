@@ -9,11 +9,10 @@ import { stagger } from "@/lib/stagger";
 
 const ACTION_LABEL = {
   ideathon: "Open the ideathon application",
-  attendee: "Open the attendee registration",
 } as const;
 
 export function Register() {
-  const { ideathon, attendee } = event.registration;
+  const { ideathon } = event.registration;
   const email = siteConfig.contactEmail;
 
   return (
@@ -24,12 +23,11 @@ export function Register() {
           id="register-title"
           eyebrow="Registration"
           title="Ready to compete?"
-          lede="Ideathon applications and attendee spots are both limited. Secure yours before they fill up."
+          lede="Ideathon applications are limited to 20 shortlisted teams. Secure yours before they fill up."
         />
 
         <div className={styles.streams}>
           <Stream anchor="apply" stream={ideathon} tone="sand" />
-          <Stream anchor="attend" stream={attendee} tone="sage" />
         </div>
 
         {email && (
@@ -66,34 +64,82 @@ function Stream({
       className={styles.stream}
       data-tone={tone}
       aria-labelledby={titleId}
-      data-reveal={tone === "sand" ? "left" : "right"}
+      data-reveal="scale"
     >
-      <h3 id={titleId} className={styles.streamTitle}>
-        {stream.title}
-      </h3>
-      <p className={styles.audience}>{stream.audience}</p>
-      <p className={styles.summary}>{stream.summary}</p>
+      <span className={styles.streamShine} aria-hidden="true" />
+      <span className={styles.streamOrbs} aria-hidden="true">
+        <span className={styles.streamOrb} data-orb="a" />
+        <span className={styles.streamOrb} data-orb="b" />
+      </span>
 
-      <h4 className={styles.subhead}>How it works</h4>
-      <ol className={styles.steps}>
-        {stream.steps.map((step, i) => (
-          <li key={step} data-reveal="left" style={stagger(i)}>
-            {step}
+      <div className={styles.streamIntro}>
+        <span className={styles.streamBadge} aria-hidden="true">
+          <span className={styles.streamBadgeDot} />
+          Applications live
+        </span>
+        <h3 id={titleId} className={styles.streamTitle}>
+          {stream.title}
+        </h3>
+        <p className={styles.audience}>{stream.audience}</p>
+        <p className={styles.summary}>{stream.summary}</p>
+
+        <div className={styles.action}>
+          <RegistrationAction state={state} label={ACTION_LABEL[stream.kind]} />
+        </div>
+
+        <ul className={styles.pillStats} aria-hidden="true">
+          <li>
+            <span className={styles.pillStatValue}>20</span>
+            <span className={styles.pillStatLabel}>shortlisted teams</span>
           </li>
-        ))}
-      </ol>
-
-      <h4 className={styles.subhead}>Good to know</h4>
-      <ul className={styles.conditions}>
-        {stream.conditions.map((c, i) => (
-          <li key={c} data-reveal style={stagger(i)}>
-            {c}
+          <li>
+            <span className={styles.pillStatValue}>2</span>
+            <span className={styles.pillStatLabel}>per team</span>
           </li>
-        ))}
-      </ul>
+          <li>
+            <span className={styles.pillStatValue}>₹0</span>
+            <span className={styles.pillStatLabel}>fee</span>
+          </li>
+        </ul>
+      </div>
 
-      <div className={styles.action}>
-        <RegistrationAction state={state} label={ACTION_LABEL[stream.kind]} />
+      <div className={styles.streamDetails}>
+        <section className={styles.detailBlock}>
+          <h4 className={styles.subhead}>
+            <span className={styles.subheadMark} aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 12h4l2-5 4 10 2-5h6" />
+              </svg>
+            </span>
+            How it works
+          </h4>
+          <ol className={styles.steps}>
+            {stream.steps.map((step, i) => (
+              <li key={step} data-reveal="left" style={stagger(i)}>
+                {step}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className={styles.detailBlock}>
+          <h4 className={styles.subhead}>
+            <span className={styles.subheadMark} aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 8v4M12 16h.01" />
+              </svg>
+            </span>
+            Good to know
+          </h4>
+          <ul className={styles.conditions}>
+            {stream.conditions.map((c, i) => (
+              <li key={c} data-reveal style={stagger(i)}>
+                {c}
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </article>
   );

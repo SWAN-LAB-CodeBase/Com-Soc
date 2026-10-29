@@ -110,7 +110,7 @@ export interface FaqItem {
   answer: readonly string[];
 }
 
-export type RegistrationKind = "ideathon" | "attendee";
+export type RegistrationKind = "ideathon";
 
 export interface RegistrationStream {
   kind: RegistrationKind;

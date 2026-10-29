@@ -334,6 +334,7 @@
   font-weight: 700;
   letter-spacing: var(--tracking-hero);
   line-height: 1.1;
+  padding-bottom: 0.12em;
 }
 
 .line {
@@ -347,11 +348,18 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: var(--teal-800); /* fallback for browsers without background-clip:text */
+  /* background-clip:text on some engines tightens the glyph box so descenders
+   * (the g in "Underpriviledged") get clipped. A touch of padding and extra
+   * line-height keeps the full glyph visible. */
+  padding-bottom: 0.18em;
+  line-height: 1.18;
 }
 
 .lede {
   max-width: 36rem;
-  margin-top: var(--space-5);
+  /* Extra breathing room so the title's descenders (g in "Underpriviledged")
+   * never overlap this paragraph. */
+  margin-top: var(--space-6);
   font-size: var(--text-lg);
   line-height: 1.45;
   letter-spacing: -0.008em;
@@ -664,7 +672,16 @@
     z-index: 2;
     margin-top: 0;
     padding-top: calc(var(--header-offset) + var(--space-6));
-    gap: var(--space-5);
+    gap: var(--space-6);
+  }
+
+  /* Explicit breathing room between the competition strip and the facts bar
+   * on narrow screens so they never visually "stick" together. */
+  .competitionStrip {
+    margin-bottom: var(--space-5);
+  }
+  .facts {
+    margin-top: var(--space-3);
   }
 
   /* Copy sits on the photo — switch to light ink. */

@@ -15,9 +15,9 @@ describe("resolveRegistration", () => {
   });
 
   it("is opening soon when no form URL exists", () => {
-    expect(resolveRegistration({ kind: "attendee", closed: false }, urls)).toEqual({
-      status: "opening-soon",
-    });
+    expect(
+      resolveRegistration({ kind: "ideathon", closed: false }, { ...urls, ideathonFormUrl: null }),
+    ).toEqual({ status: "opening-soon" });
   });
 
   it("is closed when organisers close it, even with a URL", () => {

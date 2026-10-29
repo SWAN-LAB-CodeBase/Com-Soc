@@ -9,23 +9,22 @@ import { Tracks } from "@/components/sections/Tracks";
 import { ChallengeTopics } from "@/components/sections/ChallengeTopics";
 import { Ideathon } from "@/components/sections/Ideathon";
 import { Prizes } from "@/components/sections/Prizes";
+import { Posters } from "@/components/sections/Posters";
 import { Register } from "@/components/sections/Register";
 import { Programme } from "@/components/sections/Programme";
 import { Organisers } from "@/components/sections/Organisers";
+import { AboutUs } from "@/components/sections/AboutUs";
 import { Faq } from "@/components/sections/Faq";
 import { SiteFooter } from "@/components/footer/SiteFooter";
 
 export default function Home() {
   const applyHref = siteConfig.ideathonFormUrl ?? "#apply";
-  const attendHref = siteConfig.attendeeFormUrl ?? "#attend";
   return (
     <>
       <SiteHeader
         nav={navigation}
         applyHref={applyHref}
-        attendHref={attendHref}
         applyExternal={Boolean(siteConfig.ideathonFormUrl)}
-        attendExternal={Boolean(siteConfig.attendeeFormUrl)}
       />
       <main id="main" tabIndex={-1}>
         <Hero />
@@ -35,9 +34,11 @@ export default function Home() {
         <Tracks />
         <Ideathon />
         <Prizes />
+        <Posters />
         <Register />
         <Programme />
         <Organisers />
+        <AboutUs />
         <Faq />
       </main>
       <SiteFooter nav={navigation} />

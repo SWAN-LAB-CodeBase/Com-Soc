@@ -55,7 +55,7 @@ export const event: EventConfig = {
     {
       id: "ai-ml",
       number: "02",
-      title: "AI / ML for India",
+      title: "AI/ML for Rural India",
       summary: "Innovative solutions for real-world impact.",
       description:
         "Apply artificial intelligence and machine learning to solve real connectivity and networking challenges in rural India — from intelligent routing and spectrum management to predictive maintenance.",
@@ -134,23 +134,6 @@ export const event: EventConfig = {
         "Up to two people per team.",
         "A clear communications or networking component is required.",
         "Submitting does not guarantee selection.",
-      ],
-      closed: false,
-    },
-    attendee: {
-      kind: "attendee",
-      title: "General attendee registration",
-      audience: "For anyone who wants to attend the lectures and tutorials.",
-      summary:
-        "Join the invited lectures and hands-on tutorials, and watch the shortlisted teams pitch.",
-      steps: [
-        "Register your interest with the attendee form.",
-        "The organisers confirm places by email.",
-        "Bring your confirmation to check-in on the day.",
-      ],
-      conditions: [
-        "Places are limited and confirmed by the organisers.",
-        "Attendee registration is separate from the ideathon application.",
       ],
       closed: false,
     },
@@ -248,6 +231,30 @@ export const event: EventConfig = {
       },
     },
     {
+      name: "Dr. Ayan Mondal",
+      role: "Event coordination",
+      affiliation: {
+        status: "pending",
+        internalNote: "Institution not stated in planning documents.",
+      },
+    },
+    {
+      name: "Dr. Samaresh Bera",
+      role: "Event coordination",
+      affiliation: {
+        status: "pending",
+        internalNote: "Institution not stated in planning documents.",
+      },
+    },
+    {
+      name: "Dr. Arijit Roy",
+      role: "Event coordination",
+      affiliation: {
+        status: "pending",
+        internalNote: "Institution not stated in planning documents.",
+      },
+    },
+    {
       name: "Kumarjit Ray",
       role: "Event coordination",
       affiliation: {
@@ -275,13 +282,6 @@ export const event: EventConfig = {
       answer: [
         "BTech, MTech and PhD scholars with an idea for rural communication or connectivity. Teams of one or two people — each application has a team leader and an optional second member.",
         "Twenty teams are shortlisted to take part on site.",
-      ],
-    },
-    {
-      id: "attendee-vs-ideathon",
-      question: "Can I attend without entering the ideathon?",
-      answer: [
-        "Yes. General attendee registration is a separate form for people who want to join the lectures and tutorials. Places are limited and confirmed by the organisers.",
       ],
     },
     {

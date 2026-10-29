@@ -164,11 +164,10 @@ export function Overview() {
                 />
               </div>
               <div className={styles.panel}>
-                <h3>Attendees</h3>
+                <h3>Lectures &amp; tutorials</h3>
                 <p>
-                  Anyone curious about rural networks. Join invited lectures with industry and
-                  government perspectives, and tutorials on rural wireless, LPWAN and AI-enabled
-                  networks.
+                  Two days of invited talks and hands-on sessions that run alongside the
+                  ideathon — a chance to learn from the field and sharpen the ideas you pitch.
                 </p>
                 <a href="#programme" className={styles.more}>
                   See the programme

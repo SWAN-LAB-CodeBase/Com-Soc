@@ -13,7 +13,6 @@ import styles from "./Hero.module.css";
 export function Hero() {
   const { identity, dates, venue, ideathon, tracks } = event;
   const applyUrl = siteConfig.ideathonFormUrl;
-  const attendUrl = siteConfig.attendeeFormUrl;
 
   return (
     <section id="top" className={styles.hero} aria-labelledby="hero-title">
@@ -68,14 +67,6 @@ export function Hero() {
                 →
               </span>
             </ButtonLink>
-            <ButtonLink
-              href={attendUrl ?? "#attend"}
-              external={Boolean(attendUrl)}
-              size="large"
-              variant="secondary"
-            >
-              Register to attend
-            </ButtonLink>
           </div>
           <p className={styles.freeNotice} role="note">
             <span className={styles.freeBadge} aria-hidden="true">
@@ -92,8 +83,7 @@ export function Hero() {
               Free
             </span>
             <span className={styles.freeText}>
-              Registration is <strong>completely free</strong> for applicants and attendees — no fee,
-              ever.
+              Registration is <strong>completely free</strong> for applicants — no fee, ever.
             </span>
           </p>
           {/* What's in the competition — advertised right on the hero */}

@@ -17,11 +17,6 @@ export function SiteFooter({ nav }: { nav: readonly NavItem[] }) {
       href: "#apply",
       state: resolveRegistration(registration.ideathon, siteConfig),
     },
-    {
-      label: "Attendee registration",
-      href: "#attend",
-      state: resolveRegistration(registration.attendee, siteConfig),
-    },
   ];
 
   return (
@@ -49,6 +44,12 @@ export function SiteFooter({ nav }: { nav: readonly NavItem[] }) {
                 <a href={item.href}>{item.label}</a>
               </li>
             ))}
+            <li>
+              <a href="https://swanlab.in" target="_blank" rel="noopener noreferrer">
+                About us
+                <span className="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            </li>
           </ul>
         </nav>
 

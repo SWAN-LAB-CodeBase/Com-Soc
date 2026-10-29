@@ -13,6 +13,92 @@
   margin: 0 auto;
 }
 
+/* ── Header row: title/lede on the left, illustration on the right ── */
+
+.headerRow {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.headerLede {
+  min-width: 0;
+}
+
+.headerArt {
+  display: none;
+  position: relative;
+}
+
+.art {
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  filter: drop-shadow(0 20px 30px rgb(10 23 53 / 0.15));
+}
+
+.artTrophy {
+  transform-origin: 160px 128px;
+  animation: trophy-bob 3.8s ease-in-out infinite;
+}
+
+.artBox[data-box="a"] {
+  transform-origin: 160px 206px;
+  animation: box-nudge 4.4s ease-in-out -1s infinite;
+}
+
+.artBox[data-box="b"] {
+  transform-origin: 160px 140px;
+  animation: box-nudge 4s ease-in-out -2s infinite;
+}
+
+.artSparkles path,
+.artSparkles circle {
+  transform-origin: center;
+  animation: sparkle-twinkle 2.8s ease-in-out infinite;
+}
+
+.artSparkles [data-sparkle="b"] { animation-delay: 0.4s; }
+.artSparkles [data-sparkle="c"] { animation-delay: 0.8s; }
+.artSparkles [data-sparkle="d"] { animation-delay: 1.2s; }
+.artSparkles [data-sparkle="e"] { animation-delay: 1.6s; }
+
+@keyframes trophy-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-6px) rotate(-2deg); }
+}
+
+@keyframes box-nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.4; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@media (min-width: 56em) {
+  .headerRow {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+  .headerArt {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artTrophy,
+  .artBox,
+  .artSparkles path,
+  .artSparkles circle {
+    animation: none;
+  }
+}
+
 /* ── Tier cards ────────────────────────────────────────── */
 
 .tiers {

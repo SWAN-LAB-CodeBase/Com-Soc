@@ -1,0 +1,60 @@
+{
+  "title": "Event Organising Committees",
+  "source_date": "2026-10-29",
+  "organizers": [
+    { "name": "Prof. Sudip Misra", "role": "Faculty guidance" },
+    { "name": "Dr. Ayan Mondal", "role": "Event coordination" },
+    { "name": "Dr. Samaresh Bera", "role": "Event coordination" },
+    { "name": "Dr. Arijit Roy", "role": "Event coordination" }
+  ],
+  "event_coordinators": [
+    { "name": "Kumarjit Ray" },
+    { "name": "Rajdeep Ghosh" }
+  ],
+  "team_members": {
+    "committees": [
+      {
+        "id": 1,
+        "name": "Web and Digital",
+        "lead": { "name": "Sampurna Dan" },
+        "members": [
+          "Soujash Banerjee",
+          "Arindom Aich",
+          "Paromita Nag",
+          "Jishan Aich",
+          "Subhodeep Ghosh"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Ideation + Jury",
+        "lead": { "name": "Subham Kumar" },
+        "members": ["Subham Dey", "Singarapu Pawan Kumar"]
+      },
+      {
+        "id": 3,
+        "name": "Speakers, Program, Tutorial",
+        "lead": { "name": "Diotima Nag" },
+        "members": ["Shilpi Rani", "Abhijit Saha", "Ashwini Roshan"]
+      },
+      {
+        "id": 4,
+        "name": "Registration",
+        "lead": { "name": "Prolay Mallick" },
+        "members": ["Saharsh Gupta", "Jishan Aich", "Amit Maurya"]
+      },
+      {
+        "id": 5,
+        "name": "Venue, Logistics & Hospitality",
+        "lead": { "name": "Indumouly Nandi" },
+        "members": ["Rupa Deka", "Aparesh Mahapatra"]
+      },
+      {
+        "id": 6,
+        "name": "Awards and Documentation",
+        "lead": { "name": "Jahir Alam" },
+        "members": ["Rishikant Mallick", "Tanupriya Ameta", "Subhodeep Ghosh"]
+      }
+    ]
+  }
+}

@@ -3,7 +3,7 @@ import { event } from "@/content/event";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const title = `${event.identity.name} · ${event.identity.theme}`;
+const title = event.identity.name;
 
 export const metadata: Metadata = {
   // Canonical and absolute OG URLs only once the production domain is known.

@@ -9,17 +9,13 @@ import styles from "./SiteHeader.module.css";
 interface SiteHeaderProps {
   nav: readonly NavItem[];
   applyHref: string;
-  attendHref: string;
   applyExternal?: boolean;
-  attendExternal?: boolean;
 }
 
 export function SiteHeader({
   nav,
   applyHref,
-  attendHref,
   applyExternal = false,
-  attendExternal = false,
 }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -112,15 +108,6 @@ export function SiteHeader({
 
           <div className={styles.actions}>
             <ButtonLink
-              href={attendHref}
-              external={attendExternal}
-              variant="secondary"
-              size="small"
-              className={styles.attend}
-            >
-              Register to attend
-            </ButtonLink>
-            <ButtonLink
               href={applyHref}
               external={applyExternal}
               size="small"
@@ -163,14 +150,6 @@ export function SiteHeader({
               onClick={() => setOpen(false)}
             >
               Apply for the ideathon
-            </ButtonLink>
-            <ButtonLink
-              href={attendHref}
-              external={attendExternal}
-              variant="secondary"
-              onClick={() => setOpen(false)}
-            >
-              Register to attend
             </ButtonLink>
           </div>
         </div>
