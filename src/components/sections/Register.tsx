@@ -14,6 +14,7 @@ const ACTION_LABEL = {
 
 export function Register() {
   const { ideathon, attendee } = event.registration;
+  const email = siteConfig.contactEmail;
 
   return (
     <section id="register" className={styles.section} aria-labelledby="register-title">
@@ -22,8 +23,8 @@ export function Register() {
         <SectionHeader
           id="register-title"
           eyebrow="Registration"
-          title="Two ways to take part."
-          lede="Ideathon teams and general attendees register separately. Pick the one that fits you."
+          title="Ready to compete?"
+          lede="Ideathon applications and attendee spots are both limited. Secure yours before they fill up."
         />
 
         <div className={styles.streams}>
@@ -31,11 +32,17 @@ export function Register() {
           <Stream anchor="attend" stream={attendee} tone="sage" />
         </div>
 
-        <p id="privacy" className={styles.privacy}>
-          <strong>Your data.</strong> The registration forms ask only for what the organisers need
-          to review applications and run the event, and responses are kept in access-restricted
-          records. This website does not use cookies or analytics.
-        </p>
+        {email && (
+          <div className={styles.contactRow}>
+            <a href={`mailto:${email}`} className={styles.contactBtn}>
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                <path d="M2.003 5.884 10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z" />
+                <path d="m18 8.118-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z" />
+              </svg>
+              Have questions? Contact us
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -101,23 +108,11 @@ function RegistrationAction({ state, label }: { state: RegistrationState; label:
     );
   }
 
-  const email = siteConfig.contactEmail;
   return (
     <div className={styles.status} data-status={state.status} data-reveal="scale">
       <p className={styles.statusLabel}>
         <span className={styles.statusDot} aria-hidden="true" />
         {state.status === "closed" ? "Registration closed" : "Form opening soon"}
-      </p>
-      <p className={styles.statusText}>
-        {state.status === "closed"
-          ? "This form is no longer accepting responses."
-          : "The form will be linked here as soon as it is live. Check back shortly."}
-        {email && (
-          <>
-            {" "}
-            Questions? Email <a href={`mailto:${email}`}>{email}</a>.
-          </>
-        )}
       </p>
     </div>
   );

@@ -86,10 +86,29 @@
 }
 
 .contact {
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.contactEmail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.4em 0.9em 0.4em 0.7em;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid #4f46e5;
+  color: #4f46e5 !important;
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 700;
+  text-decoration: none;
   overflow-wrap: anywhere;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.contactEmail:hover {
+  background: #4f46e5;
+  color: #ffffff !important;
 }
 
 .social {

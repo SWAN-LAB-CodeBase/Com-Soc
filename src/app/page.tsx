@@ -6,7 +6,9 @@ import { Hero } from "@/components/hero/Hero";
 import { Overview } from "@/components/sections/Overview";
 import { PhotoBand } from "@/components/sections/PhotoBand";
 import { Tracks } from "@/components/sections/Tracks";
+import { ChallengeTopics } from "@/components/sections/ChallengeTopics";
 import { Ideathon } from "@/components/sections/Ideathon";
+import { Prizes } from "@/components/sections/Prizes";
 import { Register } from "@/components/sections/Register";
 import { Programme } from "@/components/sections/Programme";
 import { Organisers } from "@/components/sections/Organisers";
@@ -14,15 +16,25 @@ import { Faq } from "@/components/sections/Faq";
 import { SiteFooter } from "@/components/footer/SiteFooter";
 
 export default function Home() {
+  const applyHref = siteConfig.ideathonFormUrl ?? "#apply";
+  const attendHref = siteConfig.attendeeFormUrl ?? "#attend";
   return (
     <>
-      <SiteHeader nav={navigation} applyHref="#apply" attendHref="#attend" />
+      <SiteHeader
+        nav={navigation}
+        applyHref={applyHref}
+        attendHref={attendHref}
+        applyExternal={Boolean(siteConfig.ideathonFormUrl)}
+        attendExternal={Boolean(siteConfig.attendeeFormUrl)}
+      />
       <main id="main" tabIndex={-1}>
         <Hero />
+        <ChallengeTopics />
         <Overview />
         <PhotoBand />
         <Tracks />
         <Ideathon />
+        <Prizes />
         <Register />
         <Programme />
         <Organisers />

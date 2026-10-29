@@ -2,10 +2,7 @@ import type { StaticImageData } from "next/image";
 import heroHillTower from "../../public/images/hero-hill-tower.jpg";
 import villagePaddy from "../../public/images/village-paddy.jpg";
 import trackLastMile from "../../public/images/track-last-mile.jpg";
-import trackResilient from "../../public/images/track-resilient.jpg";
-import trackLpwan from "../../public/images/track-lpwan.jpg";
 import trackSmart from "../../public/images/track-smart.jpg";
-import trackInclusive from "../../public/images/track-inclusive.jpg";
 import ideathonTeam from "../../public/images/ideathon-team.jpg";
 import programmeAuditorium from "../../public/images/programme-auditorium.jpg";
 import cardTeams from "../../public/images/card-teams.jpg";
@@ -65,30 +62,15 @@ export const photos = {
 
 /** One photograph per challenge track, keyed by track id. */
 export const trackPhotos: Record<string, Photo> = {
-  "last-mile": {
+  "rural-comm": {
     src: trackLastMile,
     alt: "A village road lined with houses, trees and overhead utility lines",
     source: "https://unsplash.com/photos/b-O15p8xTns",
   },
-  resilient: {
-    src: trackResilient,
-    alt: "Dark storm clouds gathering over a farm field",
-    source: "https://unsplash.com/photos/suf2PfBNdx4",
-  },
-  "ai-iot-lpwan": {
-    src: trackLpwan,
-    alt: "Rows of young crops in a field under low golden light",
-    source: "https://unsplash.com/photos/LTMaAwxanGk",
-  },
-  "smart-rural": {
+  "ai-ml": {
     src: trackSmart,
     alt: "A drone flying over rows of green crops",
     source: "https://unsplash.com/photos/nMDwrS1NsIE",
-  },
-  inclusive: {
-    src: trackInclusive,
-    alt: "A farmer in a straw hat talking on a mobile phone in a field",
-    source: "https://unsplash.com/photos/kZsxfzL_r5s",
   },
 };
 

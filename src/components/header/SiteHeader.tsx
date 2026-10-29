@@ -9,11 +9,19 @@ import styles from "./SiteHeader.module.css";
 
 interface SiteHeaderProps {
   nav: readonly NavItem[];
-  applyHref: `#${string}`;
-  attendHref: `#${string}`;
+  applyHref: string;
+  attendHref: string;
+  applyExternal?: boolean;
+  attendExternal?: boolean;
 }
 
-export function SiteHeader({ nav, applyHref, attendHref }: SiteHeaderProps) {
+export function SiteHeader({
+  nav,
+  applyHref,
+  attendHref,
+  applyExternal = false,
+  attendExternal = false,
+}: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -102,13 +110,19 @@ export function SiteHeader({ nav, applyHref, attendHref }: SiteHeaderProps) {
           <div className={styles.actions}>
             <ButtonLink
               href={attendHref}
+              external={attendExternal}
               variant="secondary"
               size="small"
               className={styles.attend}
             >
               Register to attend
             </ButtonLink>
-            <ButtonLink href={applyHref} size="small">
+            <ButtonLink
+              href={applyHref}
+              external={applyExternal}
+              size="small"
+              className={styles.apply}
+            >
               <span>
                 Apply<span className={styles.wideOnly}> for the ideathon</span>
               </span>
@@ -140,10 +154,19 @@ export function SiteHeader({ nav, applyHref, attendHref }: SiteHeaderProps) {
             </ul>
           </nav>
           <div className={styles.panelActions}>
-            <ButtonLink href={applyHref} onClick={() => setOpen(false)}>
+            <ButtonLink
+              href={applyHref}
+              external={applyExternal}
+              onClick={() => setOpen(false)}
+            >
               Apply for the ideathon
             </ButtonLink>
-            <ButtonLink href={attendHref} variant="secondary" onClick={() => setOpen(false)}>
+            <ButtonLink
+              href={attendHref}
+              external={attendExternal}
+              variant="secondary"
+              onClick={() => setOpen(false)}
+            >
               Register to attend
             </ButtonLink>
           </div>

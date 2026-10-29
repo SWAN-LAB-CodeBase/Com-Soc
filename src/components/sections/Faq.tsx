@@ -4,6 +4,7 @@ import { photos } from "@/content/media";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealImage } from "@/components/media/RevealImage";
 import { TiltSurface } from "@/components/media/TiltSurface";
+import { EmailLink } from "@/components/ui/EmailLink";
 import styles from "./Faq.module.css";
 import { stagger } from "@/lib/stagger";
 
@@ -21,11 +22,8 @@ export function Faq() {
           lede={
             email ? (
               <>
-                Something else? Email{" "}
-                <a href={`mailto:${email}`} className={styles.email}>
-                  {email}
-                </a>
-                .
+                Something else?{" "}
+                <EmailLink email={email} />
               </>
             ) : undefined
           }

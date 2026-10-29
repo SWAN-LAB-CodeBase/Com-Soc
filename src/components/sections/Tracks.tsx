@@ -1,5 +1,6 @@
 import { event } from "@/content/event";
 import { trackPhotos } from "@/content/media";
+import { siteConfig } from "@/lib/site-config";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealImage } from "@/components/media/RevealImage";
 import { TiltSurface } from "@/components/media/TiltSurface";
@@ -9,6 +10,9 @@ import styles from "./Tracks.module.css";
 import { stagger } from "@/lib/stagger";
 
 export function Tracks() {
+  const applyUrl = siteConfig.ideathonFormUrl;
+  const applyHref = applyUrl ?? "#apply";
+  const external = Boolean(applyUrl);
   return (
     <section id="tracks" className={styles.section} aria-labelledby="tracks-title">
       <div className={styles.inner}>
@@ -17,12 +21,12 @@ export function Tracks() {
           eyebrow="Challenge tracks"
           title={
             <>
-              Five problems.
+              Three arenas.
               <br />
-              One common thread.
+              One competition.
             </>
           }
-          lede="Rural communication and connectivity must be the technical core of every idea. Choose the track that fits yours."
+          lede="Rural communication must be the technical core of every idea. Pick your track and apply to compete."
         />
 
         <ol className={styles.list}>
@@ -61,6 +65,16 @@ export function Tracks() {
                       </li>
                     ))}
                   </ul>
+                  <a
+                    href={applyHref}
+                    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className={styles.enterTrack}
+                    data-reveal
+                    style={stagger(4)}
+                  >
+                    Enter this track
+                    <span aria-hidden="true"> →</span>
+                  </a>
                 </div>
               </li>
             );

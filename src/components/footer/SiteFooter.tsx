@@ -90,7 +90,13 @@ export function SiteFooter({ nav }: { nav: readonly NavItem[] }) {
           </ul>
           {email && (
             <p className={styles.contact}>
-              <a href={`mailto:${email}`}>{email}</a>
+              <a href={`mailto:${email}`} className={styles.contactEmail}>
+                <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
+                  <path d="M2.003 5.884 10 9.882l7.997-3.998A2 2 0 0 0 16 4H4a2 2 0 0 0-1.997 1.884z" />
+                  <path d="m18 8.118-8 4-8-4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.118z" />
+                </svg>
+                {email}
+              </a>
             </p>
           )}
           {social.length > 0 && (
@@ -109,19 +115,7 @@ export function SiteFooter({ nav }: { nav: readonly NavItem[] }) {
       </div>
 
       <div className={styles.legal}>
-        <p>
-          © {year} {identity.name} organising team.
-        </p>
-        <p>
-          Illustrative photography from{" "}
-          <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">
-            Unsplash
-            <span className="visually-hidden"> (opens in a new tab)</span>
-          </a>
-          ; it does not depict event participants or venues. This site sets no cookies and runs no
-          analytics. Registration data is handled as described under{" "}
-          <a href="#privacy">Registration</a>.
-        </p>
+        <p>© {year} RuralConnect 2026 Organising Team</p>
       </div>
     </footer>
   );

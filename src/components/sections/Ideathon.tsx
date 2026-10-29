@@ -1,5 +1,4 @@
 import { event } from "@/content/event";
-import type { RubricItem } from "@/content/types";
 import { formatDayHeading } from "@/lib/format";
 import { photos } from "@/content/media";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -78,19 +77,6 @@ export function Ideathon() {
           </div>
         </div>
 
-        <div className={styles.rubrics}>
-          <Rubric
-            title="How applications are shortlisted"
-            caption="Each application is scored by at least three reviewers."
-            items={ideathon.shortlistingRubric}
-          />
-          <Rubric
-            title="How final pitches are scored"
-            caption={`${ideathon.pitch.presentationMinutes}-minute presentation, then ${ideathon.pitch.questionMinutes} minutes of questions from the jury.`}
-            items={ideathon.finalRubric}
-          />
-        </div>
-
         <p className={styles.recognition} data-reveal="scale">
           <span className={styles.medals} aria-hidden="true">
             <span />
@@ -104,38 +90,3 @@ export function Ideathon() {
   );
 }
 
-function Rubric({
-  title,
-  caption,
-  items,
-}: {
-  title: string;
-  caption: string;
-  items: readonly RubricItem[];
-}) {
-  return (
-    <div className={styles.rubric} data-reveal>
-      <h3 className={styles.columnTitle}>{title}</h3>
-      <p className={styles.rubricCaption}>{caption}</p>
-      <dl>
-        {items.map((item, i) => (
-          <div key={item.criterion} data-reveal style={stagger(i)}>
-            <dt>{item.criterion}</dt>
-            <dd>
-              {item.weight}
-              <span aria-hidden="true">%</span>
-              <span className="visually-hidden"> percent</span>
-            </dd>
-            {/* Weight bar: grows to its share as the row scrolls in. */}
-            <span className={styles.bar} aria-hidden="true">
-              <span
-                data-reveal="grow"
-                style={{ ...stagger(i + 1), width: `${item.weight * 2}%` }}
-              />
-            </span>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
-}

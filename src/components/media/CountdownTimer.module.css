@@ -1,0 +1,202 @@
+/* ── Timer: translucent glass with sides that fade out ──── */
+
+.timer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-10);
+  /* Translucent frosted glass */
+  background:
+    linear-gradient(135deg, rgb(79 70 229 / 0.06) 0%, rgb(13 148 136 / 0.06) 100%),
+    rgb(255 255 255 / 0.45);
+  -webkit-backdrop-filter: blur(22px) saturate(190%);
+  backdrop-filter: blur(22px) saturate(190%);
+  /* The left and right edges blend into the background */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.4) 8%,
+    black 22%,
+    black 78%,
+    rgb(0 0 0 / 0.4) 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 0 0 / 0.4) 8%,
+    black 22%,
+    black 78%,
+    rgb(0 0 0 / 0.4) 92%,
+    transparent 100%
+  );
+}
+
+/* A hairline highlight across the top gives the glass an edge */
+.timer::before {
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.8) 50%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ── Label row ───────────────────────────────────────────── */
+
+.labelWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4f46e5;
+  white-space: nowrap;
+}
+
+.pulse {
+  display: none;
+}
+
+/* ── Units row ───────────────────────────────────────────── */
+
+.units {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 3.5rem;
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(135deg, #4f46e5 0%, #0d9488 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--blue-700);
+}
+
+.unitLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  line-height: 1;
+}
+
+/* Thin vertical glass divider between units */
+.sep {
+  width: 1px;
+  height: 2.25rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(10 23 53 / 0.18) 50%,
+    transparent 100%
+  );
+  flex-shrink: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 48em) {
+  .timer {
+    padding: var(--space-5) var(--space-7);
+  }
+
+  .units {
+    gap: var(--space-3);
+  }
+
+  .value {
+    font-size: 2rem;
+  }
+
+  .unit {
+    min-width: 3rem;
+  }
+}
+
+@media (max-width: 30em) {
+  .timer {
+    padding: var(--space-4) var(--space-5);
+    /* Narrower fade on small screens so content stays readable */
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+  }
+
+  .units {
+    gap: var(--space-2);
+  }
+
+  .value {
+    font-size: 1.75rem;
+  }
+
+  .unit {
+    min-width: 2.5rem;
+  }
+
+  .unitLabel {
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+  }
+
+  .sep {
+    height: 1.75rem;
+  }
+}
+
+/* Fallback: without backdrop-filter the glass look needs a solid tint */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .timer {
+    background: rgb(255 255 255 / 0.85);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .timer {
+    background: #ffffff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

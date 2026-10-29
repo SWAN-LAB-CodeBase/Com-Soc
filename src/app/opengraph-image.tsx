@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { event } from "@/content/event";
 import { formatDateRange } from "@/lib/format";
 
+export const dynamic = "force-static";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

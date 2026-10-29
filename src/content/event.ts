@@ -21,9 +21,9 @@ export const event: EventConfig = {
     name: "RuralConnect 2026",
     shortName: "RuralConnect",
     theme: "Technology Innovations for Rural Communication and Connectivity",
-    format: "Two-day ideathon · Invited lectures · AI-IoT tutorials",
+    format: "Ideathon challenge · Invited lectures · AI & ML tutorials",
     description:
-      "A two-day ideathon with invited lectures and AI-IoT tutorials on making rural communication and connectivity more affordable, resilient, inclusive and practical to deploy.",
+      "A two-day ideathon challenge for BTech, MTech and PhD scholars — innovate, pitch and compete on rural communication and connectivity.",
   },
 
   // The deck's execution map states "Event dates are fixed: 14–15 Nov"
@@ -34,61 +34,33 @@ export const event: EventConfig = {
   },
 
   venue: {
-    status: "pending",
-    internalNote:
-      "Deck: 'Confirm venue details and approvals before publishing.' C5 to supply booked room + address.",
+    status: "confirmed",
+    value: {
+      name: "IIT Kharagpur",
+      city: "Kharagpur, West Bengal",
+    },
   },
 
   tracks: [
     {
-      id: "last-mile",
+      id: "rural-comm",
       number: "01",
-      title: "Last-mile access",
-      summary: "Community wireless, mesh and affordable backhaul.",
+      title: "Rural Communications",
+      summary: "Bridging connectivity gaps for a stronger India.",
       description:
-        "The final stretch to homes, farms and community centres is where connectivity usually stops. Propose ways to get it there at a cost a rural community can sustain.",
-      focus: ["Community wireless", "Mesh networking", "Affordable backhaul"],
+        "Design communication solutions that bridge the connectivity gap in rural India — from community wireless and mesh networks to affordable last-mile backhaul and emergency links.",
+      focus: ["Wireless communication", "Community networks", "Last-mile connectivity"],
       glyph: "mesh",
     },
     {
-      id: "resilient",
+      id: "ai-ml",
       number: "02",
-      title: "Resilient networks",
-      summary: "Emergency links and outage-tolerant communications.",
+      title: "AI / ML for India",
+      summary: "Innovative solutions for real-world impact.",
       description:
-        "Power cuts, storms and long distances test every link. Design communications that keep working, or recover quickly, when infrastructure fails.",
-      focus: ["Emergency links", "Outage tolerance", "Fast recovery"],
-      glyph: "resilience",
-    },
-    {
-      id: "ai-iot-lpwan",
-      number: "03",
-      title: "AI-IoT and LPWAN",
-      summary: "Low-power sensing, routing and network adaptation.",
-      description:
-        "Sensors in fields and villages run on small batteries over long ranges. Rethink how they sense, route and adapt so the network lasts.",
-      focus: ["Low-power sensing", "LPWAN routing", "Network adaptation"],
-      glyph: "lowpower",
-    },
-    {
-      id: "smart-rural",
-      number: "04",
-      title: "Smart rural networks",
-      summary: "AI-assisted optimisation and resource management.",
-      description:
-        "Scarce spectrum, energy and backhaul have to be shared well. Apply AI to plan, optimise and manage rural network resources.",
-      focus: ["AI-assisted optimisation", "Resource management", "Network planning"],
+        "Apply artificial intelligence and machine learning to solve real connectivity and networking challenges in rural India — from intelligent routing and spectrum management to predictive maintenance.",
+      focus: ["Artificial intelligence", "Machine learning", "Network optimisation"],
       glyph: "optimise",
-    },
-    {
-      id: "inclusive",
-      number: "05",
-      title: "Inclusive applications",
-      summary: "Agriculture, health and education, with network novelty.",
-      description:
-        "Services for farmers, clinics and classrooms qualify when the innovation lives in the network: how the service is delivered, not only what the app does.",
-      focus: ["Agriculture", "Healthcare", "Education"],
-      glyph: "inclusion",
     },
   ],
 
@@ -135,9 +107,8 @@ export const event: EventConfig = {
     ],
     recognition: "The top three teams are recognised at the closing session.",
     applicationDeadline: {
-      status: "pending",
-      internalNote:
-        "Playbook: '4 Nov: idea intake ends (proposed)'. Needs C2 + coordination sign-off.",
+      status: "confirmed",
+      value: "2026-11-02",
     },
     shortlistAnnouncement: {
       status: "pending",
@@ -150,9 +121,9 @@ export const event: EventConfig = {
     ideathon: {
       kind: "ideathon",
       title: "Ideathon application",
-      audience: "For teams of one or two with a rural networking idea.",
+      audience: "For BTech, MTech and PhD scholars with a rural networking idea.",
       summary:
-        "Apply with an idea in one of the five tracks. Shortlisted teams develop and pitch it on site across both days.",
+        "Apply with an idea in one of the three tracks. Shortlisted teams develop and pitch it on site across both days. Limited TA and accommodation for two nights at IIT Kharagpur.",
       steps: [
         "Choose a challenge track and write your abstract.",
         "Submit the application as a team leader, with an optional second member.",
@@ -277,7 +248,7 @@ export const event: EventConfig = {
       },
     },
     {
-      name: "Rajdeep Ghosh",
+      name: "Kumarjit Ray",
       role: "Event coordination",
       affiliation: {
         status: "pending",
@@ -285,7 +256,7 @@ export const event: EventConfig = {
       },
     },
     {
-      name: "Kumarjit Ray",
+      name: "Rajdeep Ghosh",
       role: "Event coordination",
       affiliation: {
         status: "pending",
@@ -302,7 +273,7 @@ export const event: EventConfig = {
       id: "who-can-apply",
       question: "Who can take part in the ideathon?",
       answer: [
-        "Teams of one or two people with an idea for rural communication or connectivity. Each application has a team leader and an optional second member.",
+        "BTech, MTech and PhD scholars with an idea for rural communication or connectivity. Teams of one or two people — each application has a team leader and an optional second member.",
         "Twenty teams are shortlisted to take part on site.",
       ],
     },
@@ -346,14 +317,6 @@ export const event: EventConfig = {
       question: "When will speakers and the venue be announced?",
       answer: [
         "Speaker names and the venue are published on this page as soon as they are confirmed. The programme shown here is provisional, and timings may change.",
-      ],
-    },
-    {
-      id: "privacy",
-      question: "What happens to the information I submit?",
-      answer: [
-        "The registration forms ask only for what the organisers need to review applications and run the event. Responses are kept in access-restricted records used only for this event.",
-        "This website itself does not use cookies or analytics, and does not collect personal data.",
       ],
     },
   ],

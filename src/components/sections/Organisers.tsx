@@ -3,6 +3,13 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import styles from "./Organisers.module.css";
 import { stagger } from "@/lib/stagger";
 
+const SPEAKER_DOMAINS = [
+  "Industry leader",
+  "Government expert",
+  "AI innovator",
+  "Rural pioneer",
+] as const;
+
 export function Organisers() {
   const speakers = event.speakers.filter((s) => s.publication === "confirmed");
 
@@ -32,7 +39,14 @@ export function Organisers() {
         </ul>
 
         <div className={styles.speakers} data-reveal>
-          <h3 className={styles.speakersTitle}>Invited speakers</h3>
+          <h3 className={styles.speakersTitle}>
+            Invited speakers
+            {speakers.length === 0 && (
+              <span className={styles.speakersBadge} aria-label="Lineup being confirmed">
+                Coming soon
+              </span>
+            )}
+          </h3>
           {speakers.length > 0 ? (
             <ul className={styles.speakerList}>
               {speakers.map((s) => (
@@ -47,11 +61,33 @@ export function Organisers() {
               ))}
             </ul>
           ) : (
-            <p className={styles.tba}>
-              Lectures from industry and government speakers, and tutorials on rural wireless, LPWAN
-              and AI-enabled networks, are being confirmed. Names will appear here once each speaker
-              has accepted.
-            </p>
+            <div className={styles.speakerTeaser}>
+              <p className={styles.teaserSignal}>
+                <span className={styles.teaserDot} aria-hidden="true" />
+                Lineup being confirmed — watch this space
+              </p>
+              <ul className={styles.ghostCards} aria-hidden="true">
+                {SPEAKER_DOMAINS.map((domain) => (
+                  <li key={domain} className={styles.ghostCard}>
+                    <span className={styles.ghostAvatar}>
+                      <span className={styles.ghostAvatarShimmer} />
+                    </span>
+                    <span className={styles.ghostDomain}>{domain}</span>
+                    <span className={styles.ghostBar}>
+                      <span className={styles.ghostBarShimmer} />
+                    </span>
+                    <span className={styles.ghostBarShort}>
+                      <span className={styles.ghostBarShimmer} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className={styles.tba}>
+                Industry and government lectures, and tutorials on rural wireless, LPWAN and
+                AI-enabled networks, are being confirmed. Names appear here once each speaker has
+                accepted.
+              </p>
+            </div>
           )}
         </div>
       </div>
