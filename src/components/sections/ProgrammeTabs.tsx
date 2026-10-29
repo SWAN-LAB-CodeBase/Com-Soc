@@ -90,25 +90,27 @@ export function ProgrammeTabs({ days }: { days: readonly ProgrammeTabDay[] }) {
             <span className="visually-hidden">{day.label}, </span>
             {day.theme}
           </h3>
-          <ol className={styles.sessions}>
-            {day.sessions.map((s) => (
-              <li
-                key={`${s.start}-${s.title}`}
-                className={styles.session}
-                data-kind={s.kind}
-                data-reveal
+          <div className={styles.scheduleTeaser} role="status" aria-live="polite">
+            <span className={styles.teaserBadge} aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <p className={styles.time}>
-                  <time dateTime={`${day.date}T${s.start}`}>{s.start}</time>
-                  <span aria-hidden="true">–</span>
-                  <span className="visually-hidden"> to </span>
-                  <time dateTime={`${day.date}T${s.end}`}>{s.end}</time>
-                </p>
-                <p className={styles.sessionTitle}>{s.title}</p>
-                {s.kind !== "break" && <p className={styles.kind}>{KIND_LABEL[s.kind]}</p>}
-              </li>
-            ))}
-          </ol>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+              Coming soon
+            </span>
+            <p className={styles.teaserTitle}>Full {day.label} schedule to be shared soon.</p>
+            <p className={styles.teaserBody}>
+              Timings, speakers and session details are being finalised. Check back shortly — or
+              register to be notified first.
+            </p>
+          </div>
         </div>
       ))}
     </div>

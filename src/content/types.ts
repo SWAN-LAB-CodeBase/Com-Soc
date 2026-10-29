@@ -138,6 +138,6 @@ export interface EventConfig {
 }
 
 export interface NavItem {
-  href: `#${string}`;
+  href: `#${string}` | `/${string}`;
   label: string;
 }

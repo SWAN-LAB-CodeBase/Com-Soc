@@ -618,6 +618,152 @@
 
 /* ── Layout ─────────────────────────────────────────────── */
 
+/*
+ * Small screens: no coloured "purple" backdrop under the copy. The photo is
+ * the full-bleed backdrop for the hero and the title/lede/audience sit
+ * directly on it, with a dark gradient for legibility. The facts bar, CTAs
+ * and strip continue below on a plain light surface.
+ */
+@media (max-width: 47.99em) {
+  .hero {
+    --color-bg: #f5f0e6;
+    background: var(--color-bg);
+    display: grid;
+    isolation: isolate;
+  }
+
+  .aurora,
+  .themes {
+    display: none;
+  }
+
+  .media {
+    position: absolute;
+    inset: 0 0 auto;
+    height: clamp(32rem, 82svh, 42rem);
+    z-index: 0;
+  }
+
+  .media::after {
+    background: linear-gradient(
+      to bottom,
+      rgb(10 23 53 / 0.55) 0%,
+      rgb(10 23 53 / 0.4) 35%,
+      rgb(10 23 53 / 0.1) 65%,
+      var(--color-bg) 100%
+    );
+  }
+
+  .wash {
+    background: rgb(10 23 53 / 0.15);
+    mix-blend-mode: normal;
+  }
+
+  .inner {
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+    padding-top: calc(var(--header-offset) + var(--space-6));
+    gap: var(--space-5);
+  }
+
+  /* Copy sits on the photo — switch to light ink. */
+  .copy {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+  }
+
+  /* On phone view, the "Competition open" badge moves to right after the
+   * "Empowering Underpriviledged Youth" accent heading. */
+  .copy > .eyebrow { order: 1; }
+  .copy > .title { order: 2; }
+  .copy > .buzz {
+    order: 3;
+    margin: var(--space-4) 0 0;
+    align-self: flex-start;
+  }
+  .copy > .lede { order: 4; }
+  .copy > .audience { order: 5; }
+  .copy > .ctas { order: 6; }
+  .copy > .freeNotice { order: 7; }
+  .copy > .competitionStrip { order: 8; }
+
+  /* Free registration pill — make it a flexible stacked card that reads
+   * cleanly on the dark hero photo and never overflows the viewport. */
+  .freeNotice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-2);
+    width: 100%;
+    max-width: 24rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    background: rgb(255 255 255 / 0.92);
+    border: 1px solid rgb(220 38 38 / 0.45);
+    box-shadow:
+      0 10px 24px -10px rgb(185 28 28 / 0.4),
+      inset 0 0 0 1px rgb(255 255 255 / 0.6);
+    color: var(--color-ink);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .freeText {
+    display: block;
+    width: 100%;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+
+  .freeText strong {
+    color: #b91c1c;
+  }
+}
+
+/* Below ~22em, free pill becomes extra compact so it still fits. */
+@media (max-width: 22.49em) {
+  .freeBadge {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.55rem 0.2rem 0.35rem;
+  }
+  .freeText {
+    font-size: var(--text-xs);
+  }
+
+  .eyebrow {
+    color: #93c5fd;
+  }
+
+  .title {
+    color: #ffffff;
+    text-shadow: 0 2px 24px rgb(10 23 53 / 0.5);
+  }
+
+  .accent {
+    background: linear-gradient(135deg, #93c5fd 0%, #5eead4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #5eead4;
+  }
+
+  .lede {
+    color: rgb(255 255 255 / 0.95);
+    text-shadow: 0 1px 12px rgb(10 23 53 / 0.45);
+  }
+
+  .audience {
+    color: rgb(255 255 255 / 0.8);
+    text-shadow: 0 1px 10px rgb(10 23 53 / 0.4);
+  }
+}
+
 @media (min-width: 40em) {
   .ctas {
     display: flex;

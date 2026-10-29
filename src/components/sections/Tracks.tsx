@@ -21,7 +21,7 @@ export function Tracks() {
           eyebrow="Challenge tracks"
           title={
             <>
-              Three arenas.
+              Two arenas.
               <br />
               One competition.
             </>

@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { BrandMark } from "@/components/brand/BrandMark";
-import { Wordmark } from "@/components/brand/Wordmark";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import type { NavItem } from "@/content/types";
 import styles from "./SiteHeader.module.css";
@@ -90,9 +89,13 @@ export function SiteHeader({
         data-open={open || undefined}
       >
         <div className={styles.bar}>
-          <a href="#top" className={styles.brand} onClick={() => setOpen(false)}>
-            <BrandMark size={30} />
-            <Wordmark size="medium" showYear={false} />
+          <a
+            href="#top"
+            className={styles.brand}
+            aria-label="RuralConnect — home"
+            onClick={() => setOpen(false)}
+          >
+            <BrandMark size={41} />
           </a>
 
           <nav aria-label="Primary" className={styles.desktopNav}>

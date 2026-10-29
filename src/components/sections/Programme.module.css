@@ -108,6 +108,89 @@
   line-height: 1.2;
 }
 
+/* ── Schedule teaser (replaces hidden day details) ─────── */
+
+.scheduleTeaser {
+  position: relative;
+  margin-top: var(--space-5);
+  padding: clamp(var(--space-6), 3vw + 0.5rem, var(--space-8));
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(45rem 22rem at 100% 0%, rgb(29 78 216 / 0.08), transparent 60%),
+    radial-gradient(40rem 20rem at 0% 100%, rgb(13 138 128 / 0.08), transparent 60%),
+    var(--color-surface);
+  border: 1px solid var(--color-line);
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+.scheduleTeaser::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(rgb(10 23 53 / 0.08) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+  mask-image: radial-gradient(ellipse at center, #000 15%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 15%, transparent 70%);
+  opacity: 0.6;
+}
+
+.teaserBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--blue-700);
+  color: #ffffff;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px -8px rgb(29 78 216 / 0.55);
+}
+
+.teaserBadge svg {
+  width: 1rem;
+  height: 1rem;
+  animation: teaser-tick 2.4s ease-in-out infinite;
+}
+
+@keyframes teaser-tick {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+.teaserTitle {
+  margin: 0 auto;
+  max-width: 32rem;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.teaserBody {
+  margin: var(--space-3) auto 0;
+  max-width: 34rem;
+  font-size: var(--text-md);
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teaserBadge svg {
+    animation: none;
+  }
+}
+
 .sessions {
   margin-top: var(--space-4);
   border-top: 1px solid var(--color-line-strong);

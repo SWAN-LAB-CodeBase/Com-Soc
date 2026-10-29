@@ -41,7 +41,7 @@ export function Hero() {
         <div className={styles.copy}>
           <div className={styles.buzz} role="status" aria-label="Competition is open">
             <span className={styles.liveSignal} aria-hidden="true" />
-            Competition open&ensp;·&ensp;14–15&nbsp;November &nbsp;2026
+            Competition open&ensp;·&ensp;14–15&nbsp;November&nbsp;2026
           </div>
           <p className={styles.eyebrow} aria-hidden="true">
             {identity.name}
@@ -53,7 +53,7 @@ export function Hero() {
           </h1>
           <p className={styles.lede}>{identity.description}</p>
           <p className={styles.audience}>
-            For UnderGraduate, PostGraduate and PhD — innovate, pitch and compete across{" "}
+            For UG, PG and PhD — innovate, pitch and compete across{" "}
             {tracks.length} challenge tracks.
           </p>
           <div className={styles.ctas}>

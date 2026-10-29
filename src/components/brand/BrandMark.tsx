@@ -1,23 +1,23 @@
+import Image from "next/image";
+
 /**
- * The two-tone sphere mark: dark teal over network blue, split on a gentle
- * tilt. Decorative — always paired with the visible event name. Uses no
- * gradient/clip ids, so any number of instances can share a page.
+ * The RuralConnect wordmark logo — includes the "RuralConnect" text, leaves
+ * and wifi mark in a single horizontal image. Pass `size` as the rendered
+ * height in CSS pixels; width scales from the natural aspect ratio (865:288).
  */
-export function BrandMark({ size = 28 }: { size?: number }) {
+const LOGO_RATIO = 865 / 288;
+
+export function BrandMark({ size = 32 }: { size?: number }) {
+  const height = size;
+  const width = Math.round(height * LOGO_RATIO);
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-      <circle cx="16" cy="16" r="15" fill="#0B6E66" />
-      <path d="M1.23 18.6Q16 20.5 30.77 13.4A15 15 0 0 1 1.23 18.6Z" fill="#1D4ED8" />
-      <ellipse
-        cx="11"
-        cy="9.5"
-        rx="6"
-        ry="3.6"
-        fill="#fff"
-        opacity="0.35"
-        transform="rotate(-25 11 9.5)"
-      />
-      <circle cx="16" cy="16" r="14.5" fill="none" stroke="#06112B" strokeOpacity="0.35" />
-    </svg>
+    <Image
+      src="/images/ruralconnect-logo.png"
+      alt="RuralConnect"
+      height={height}
+      width={width}
+      priority
+      style={{ height: `${height}px`, width: "auto" }}
+    />
   );
 }
