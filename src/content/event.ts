@@ -23,7 +23,7 @@ export const event: EventConfig = {
     theme: "Technology Innovations for Rural Communication and Connectivity",
     format: "Ideathon challenge · Invited lectures · AI & ML tutorials",
     description:
-      "A two-day ideathon challenge for BTech, MTech and PhD scholars — innovate, pitch and compete on rural communication and connectivity.",
+      "A two-day National Workshop on Rural Communication Innovations: Empowering Underprivileged Youth, for UG, PG, and PhD students — innovate, pitch, and compete on rural communication and connectivity.",
   },
 
   // The deck's execution map states "Event dates are fixed: 14–15 Nov"
@@ -224,7 +224,15 @@ export const event: EventConfig = {
   organizers: [
     {
       name: "Prof. Sudip Misra",
-      role: "Faculty guidance",
+      role: "Organizing Chair",
+      affiliation: {
+        status: "pending",
+        internalNote: "Institution not stated in planning documents.",
+      },
+    },
+    {
+      name: "Prof. Amlan Chakrabarti",
+      role: "Co-organizer",
       affiliation: {
         status: "pending",
         internalNote: "Institution not stated in planning documents.",
@@ -232,7 +240,7 @@ export const event: EventConfig = {
     },
     {
       name: "Dr. Ayan Mondal",
-      role: "Event coordination",
+      role: "Co-organizer",
       affiliation: {
         status: "pending",
         internalNote: "Institution not stated in planning documents.",
@@ -240,7 +248,7 @@ export const event: EventConfig = {
     },
     {
       name: "Dr. Samaresh Bera",
-      role: "Event coordination",
+      role: "Co-organizer",
       affiliation: {
         status: "pending",
         internalNote: "Institution not stated in planning documents.",
@@ -248,7 +256,7 @@ export const event: EventConfig = {
     },
     {
       name: "Dr. Arijit Roy",
-      role: "Event coordination",
+      role: "Co-organizer",
       affiliation: {
         status: "pending",
         internalNote: "Institution not stated in planning documents.",

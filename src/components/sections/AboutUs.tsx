@@ -1,27 +1,12 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ButtonLink } from "@/components/ui/ButtonLink";
 import { stagger } from "@/lib/stagger";
 import styles from "./AboutUs.module.css";
 
-const PILLARS = [
-  {
-    key: "wireless",
-    title: "Wireless networks",
-    body: "Protocols, mesh, LPWAN and emerging radio systems that reach where fibre cannot.",
-    tone: "indigo",
-  },
-  {
-    key: "iot",
-    title: "IoT & smart sensing",
-    body: "Low-power sensing, edge intelligence and the data pipelines that make villages legible to a network.",
-    tone: "teal",
-  },
-  {
-    key: "ai",
-    title: "AI for networking",
-    body: "Machine learning in the stack — intelligent routing, spectrum sharing and anomaly detection.",
-    tone: "amber",
-  },
+const SUPPORTERS = [
+  { key: "ieee-comsoc", label: "IEEE ComSoc", tone: "indigo" },
+  { key: "nptel", label: "NPTEL", tone: "teal" },
+  { key: "ieee-kgp-cssbc", label: "IEEE Kharagpur Section CS-SBC", tone: "amber" },
+  { key: "ieee-kgp-sb", label: "IEEE Kharagpur Section SB", tone: "indigo" },
 ] as const;
 
 export function AboutUs() {
@@ -35,52 +20,31 @@ export function AboutUs() {
       <div className={styles.inner}>
         <SectionHeader
           id="about-us-title"
-          eyebrow="About us"
+          eyebrow="About the event"
           title={
             <>
-              RuralConnect is organised by{" "}
-              <span className={styles.titleAccent}>SWAN Lab, IIT Kharagpur</span>.
+              <span className={styles.titleAccent}>RuralConnect</span> will be held at{" "}
+              <span className={styles.titleAccent}>IIT Kharagpur</span>, supported by a coalition of
+              national bodies championing rural connectivity.
             </>
           }
-          lede="The Smart Wireless Applications and Networking (SWAN) Lab at IIT Kharagpur builds the networks, protocols and intelligent systems that keep the next billion people online — and rural communities at the centre of its work."
+          lede="A two-day National Workshop convening students, researchers and industry around the networks that reach India's villages."
         />
 
-        <div className={styles.body}>
-          <ul className={styles.pillars} aria-label="Research focus">
-            {PILLARS.map((p, i) => (
-              <li
-                key={p.key}
-                className={styles.pillar}
-                data-tone={p.tone}
-                data-reveal="scale"
-                style={stagger(i)}
-              >
-                <span className={styles.pillarMark} aria-hidden="true" />
-                <h3 className={styles.pillarTitle}>{p.title}</h3>
-                <p className={styles.pillarBody}>{p.body}</p>
-              </li>
-            ))}
-          </ul>
-
-          <div className={styles.callout} data-reveal>
-            <p className={styles.calloutTitle}>Learn more about the lab.</p>
-            <p className={styles.calloutBody}>
-              Browse our ongoing research, past projects and student life at{" "}
-              <strong>swanlab.in</strong>.
-            </p>
-            <div className={styles.calloutActions}>
-              <ButtonLink
-                href="https://swanlab.in"
-                external
-                size="large"
-                className={styles.cta}
-              >
-                Visit swanlab.in
-                <span aria-hidden="true"> →</span>
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
+        <ul className={styles.supporters} aria-label="Supporting organisations">
+          {SUPPORTERS.map((s, i) => (
+            <li
+              key={s.key}
+              className={styles.supporter}
+              data-tone={s.tone}
+              data-reveal="scale"
+              style={stagger(i)}
+            >
+              <span className={styles.supporterMark} aria-hidden="true" />
+              <span className={styles.supporterLabel}>{s.label}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

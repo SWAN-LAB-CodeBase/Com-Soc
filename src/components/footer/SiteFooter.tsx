@@ -44,12 +44,6 @@ export function SiteFooter({ nav }: { nav: readonly NavItem[] }) {
                 <a href={item.href}>{item.label}</a>
               </li>
             ))}
-            <li>
-              <a href="https://swanlab.in" target="_blank" rel="noopener noreferrer">
-                About us
-                <span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
-            </li>
           </ul>
         </nav>
 

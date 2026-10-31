@@ -2,21 +2,14 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { BrandMark } from "@/components/brand/BrandMark";
-import { ButtonLink } from "@/components/ui/ButtonLink";
 import type { NavItem } from "@/content/types";
 import styles from "./SiteHeader.module.css";
 
 interface SiteHeaderProps {
   nav: readonly NavItem[];
-  applyHref: string;
-  applyExternal?: boolean;
 }
 
-export function SiteHeader({
-  nav,
-  applyHref,
-  applyExternal = false,
-}: SiteHeaderProps) {
+export function SiteHeader({ nav }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -107,16 +100,6 @@ export function SiteHeader({
           </nav>
 
           <div className={styles.actions}>
-            <ButtonLink
-              href={applyHref}
-              external={applyExternal}
-              size="small"
-              className={styles.apply}
-            >
-              <span>
-                Apply<span className={styles.wideOnly}> for the ideathon</span>
-              </span>
-            </ButtonLink>
             <button
               ref={toggleRef}
               type="button"
@@ -143,15 +126,6 @@ export function SiteHeader({
               ))}
             </ul>
           </nav>
-          <div className={styles.panelActions}>
-            <ButtonLink
-              href={applyHref}
-              external={applyExternal}
-              onClick={() => setOpen(false)}
-            >
-              Apply for the ideathon
-            </ButtonLink>
-          </div>
         </div>
       </header>
       {/* Outside the header, so a tap here counts as an outside pointer and dismisses. */}

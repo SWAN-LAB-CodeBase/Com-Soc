@@ -38,10 +38,6 @@ export function Hero() {
 
       <div className={styles.inner}>
         <div className={styles.copy}>
-          <div className={styles.buzz} role="status" aria-label="Competition is open">
-            <span className={styles.liveSignal} aria-hidden="true" />
-            Competition open&ensp;·&ensp;14–15&nbsp;November&nbsp;2026
-          </div>
           <p className={styles.eyebrow} aria-hidden="true">
             {identity.name}
           </p>
@@ -54,6 +50,11 @@ export function Hero() {
           <p className={styles.audience}>
             For UG, PG and PhD — innovate, pitch and compete across{" "}
             {tracks.length} challenge tracks.
+          </p>
+          <p className={styles.ideaIntro}>
+            Amongst an assortment of events to be hosted by the workshop, one of the highlights is
+            the <strong>Ideathon</strong> where you can pitch your ideas catering to rural
+            communication and connectivity and get a chance to win exciting prizes and gifts.
           </p>
           <div className={styles.ctas}>
             <ButtonLink

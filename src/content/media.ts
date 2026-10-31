@@ -10,53 +10,51 @@ import cardAttendees from "../../public/images/card-attendees.jpg";
 import faqTowerHill from "../../public/images/faq-tower-hill.jpg";
 
 /**
- * Stock photography, all from Unsplash under the Unsplash License (free for
- * commercial use, no attribution required — credited anyway in the footer).
- * These are illustrative: none depicts RuralConnect participants, speakers
- * or venues, and captions must never imply otherwise.
+ * Illustrations commissioned for RuralConnect 2026. They are evocative, not
+ * documentary: none depicts specific participants, speakers or venues, and
+ * captions must never imply otherwise.
  */
 export interface Photo {
   src: StaticImageData;
   alt: string;
-  /** Unsplash photo page, for credits and licence checks. */
   source: string;
 }
 
 export const photos = {
   hero: {
     src: heroHillTower,
-    alt: "A telecom tower and electricity poles on a green hillside in the countryside",
-    source: "https://unsplash.com/photos/cQUGFpXUk1g",
+    alt: "A cell tower standing on a green hilltop under a bright blue sky — illustrating connectivity for rural India",
+    source: "",
   },
   village: {
     src: villagePaddy,
-    alt: "Green paddy fields beside a rural road under a cloudy sky",
-    source: "https://unsplash.com/photos/KbV_kERgQL8",
+    alt: "A wide panorama of lush paddy fields and a tree-lined village road under a bright blue sky",
+    source: "",
   },
   ideathon: {
     src: ideathonTeam,
-    alt: "Students working on laptops together at long tables",
-    source: "https://unsplash.com/photos/sIjqrd51grA",
+    alt: "An ideathon hall with teams gathered around tables, whiteboards, and the RuralConnect banner on stage",
+    source: "",
   },
   programme: {
     src: programmeAuditorium,
-    alt: "A speaker presenting to a large audience in an auditorium",
-    source: "https://unsplash.com/photos/qzO9a6oQ8AM",
+    alt: "A speaker at a university lectern presenting a networking architecture slide to a seated audience",
+    source: "",
   },
   cardTeams: {
     src: cardTeams,
-    alt: "Seen from above, students work together on laptops around a long table",
-    source: "https://unsplash.com/photos/Dg8WzlOE1as",
+    alt: "Overhead view of two long tables where students collaborate on laptops, notebooks and phones",
+    source: "",
   },
   cardAttendees: {
     src: cardAttendees,
-    alt: "An audience seated in a lecture hall watching a presentation",
-    source: "https://unsplash.com/photos/1jvRMi8V1U0",
+    alt: "A panel of speakers on stage in a packed auditorium with a sustainability slide behind them",
+    source: "",
   },
   faq: {
     src: faqTowerHill,
-    alt: "A communication tower on a green hill under a cloudy sky",
-    source: "https://unsplash.com/photos/9MkZQzFqLO8",
+    alt: "A cell tower on a quiet green hilltop under drifting clouds",
+    source: "",
   },
 } satisfies Record<string, Photo>;
 
@@ -64,13 +62,13 @@ export const photos = {
 export const trackPhotos: Record<string, Photo> = {
   "rural-comm": {
     src: trackLastMile,
-    alt: "A village road lined with houses, trees and overhead utility lines",
-    source: "https://unsplash.com/photos/b-O15p8xTns",
+    alt: "A sunlit village lane with tiled-roof homes, dense greenery and overhead power lines running down the road",
+    source: "",
   },
   "ai-ml": {
     src: trackSmart,
-    alt: "A drone flying over rows of green crops",
-    source: "https://unsplash.com/photos/nMDwrS1NsIE",
+    alt: "An agricultural drone spraying rows of green crops — AI/ML for rural India",
+    source: "",
   },
 };
 

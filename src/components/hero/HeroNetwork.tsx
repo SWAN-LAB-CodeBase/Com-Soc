@@ -2,26 +2,26 @@ import styles from "./Hero.module.css";
 
 /**
  * Network links drawn over the hero photograph, in the photo's own pixel
- * space (1500 × 1000). `preserveAspectRatio="xMidYMid slice"` crops exactly
+ * space (1920 × 1098). `preserveAspectRatio="xMidYMid slice"` crops exactly
  * like the photo's `object-fit: cover`, so the links stay anchored to the
- * tower and the hillside at every viewport size.
+ * tower antenna at every viewport size.
  */
 
-const TOWER = { x: 683, y: 447 };
+const TOWER = { x: 1240, y: 365 };
 
 const LINKS = [
   {
     id: "hero-link-a",
-    to: { x: 424, y: 600 },
-    via: { x: 540, y: 400 },
+    to: { x: 560, y: 540 },
+    via: { x: 960, y: 320 },
     dur: "3.4s",
     begin: "2.2s",
   },
-  { id: "hero-link-b", to: { x: 1075, y: 515 }, via: { x: 880, y: 330 }, dur: "3s", begin: "2.8s" },
+  { id: "hero-link-b", to: { x: 300, y: 240 }, via: { x: 780, y: 230 }, dur: "3s", begin: "2.8s" },
   {
     id: "hero-link-c",
-    to: { x: 1370, y: 705 },
-    via: { x: 1080, y: 360 },
+    to: { x: 1760, y: 820 },
+    via: { x: 1620, y: 600 },
     dur: "4.2s",
     begin: "3.5s",
   },
@@ -31,7 +31,7 @@ export function HeroNetwork() {
   return (
     <svg
       className={styles.network}
-      viewBox="0 0 1500 1000"
+      viewBox="0 0 1920 1098"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
       focusable="false"

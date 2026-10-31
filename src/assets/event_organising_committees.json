@@ -2,14 +2,75 @@
   "title": "Event Organising Committees",
   "source_date": "2026-10-29",
   "organizers": [
-    { "name": "Prof. Sudip Misra", "role": "Faculty guidance" },
-    { "name": "Dr. Ayan Mondal", "role": "Event coordination" },
-    { "name": "Dr. Samaresh Bera", "role": "Event coordination" },
-    { "name": "Dr. Arijit Roy", "role": "Event coordination" }
+    {
+      "name": "Prof. Sudip Misra",
+      "role": "Organizing Chair",
+      "photo": "/images/people/sudip-misra.jpeg",
+      "affiliations": [
+        {
+          "position": "INAE Chair Professor, Department of Computer Science and Engineering",
+          "institution": "Indian Institute of Technology Kharagpur, India"
+        }
+      ],
+      "memberships": "FACM · FIEEE · FNAE · FIET · FNASc"
+    },
+    {
+      "name": "Prof. Amlan Chakrabarti",
+      "role": "Co-organizer",
+      "photo": "/images/people/amlan-chakrabarti.png",
+      "affiliations": [
+        {
+          "position": "Professor and Director, A.K. Choudhury School of Information Technology",
+          "institution": "University of Calcutta"
+        },
+        {
+          "position": "Visiting Professor, Department of Artificial Intelligence",
+          "institution": "IIT Kharagpur"
+        }
+      ]
+    },
+    {
+      "name": "Dr. Ayan Mondal",
+      "role": "Co-organizer",
+      "photo": "/images/people/ayan-mondal.png",
+      "affiliations": [
+        {
+          "position": "Assistant Professor, Department of Computer Science and Engineering",
+          "institution": "Indian Institute of Technology Indore"
+        },
+        {
+          "position": "Associate Project Director",
+          "institution": "IITI DRISHTI CPS Foundation"
+        }
+      ]
+    },
+    {
+      "name": "Dr. Samaresh Bera",
+      "role": "Co-organizer",
+      "photo": "/images/people/samaresh-bera.jpg",
+      "affiliations": [
+        {
+          "position": "Assistant Professor, Department of Computer Science and Engineering",
+          "institution": "Indian Institute of Technology Jammu"
+        }
+      ],
+      "memberships": "Senior Member, IEEE · Member, ACM"
+    },
+    {
+      "name": "Dr. Arijit Roy",
+      "role": "Co-organizer",
+      "photo": "/images/people/arijit-roy.jpg",
+      "affiliations": [
+        {
+          "position": "Assistant Professor, Department of Computer Science and Engineering",
+          "institution": "Indian Institute of Technology Patna"
+        }
+      ]
+    }
   ],
   "event_coordinators": [
-    { "name": "Kumarjit Ray" },
-    { "name": "Rajdeep Ghosh" }
+    { "name": "Kumarjit Ray", "photo": "/images/people/kumarjit-ray.jpeg" },
+    { "name": "Rajdeep Ghosh", "photo": "/images/people/rajdeep-ghosh.jpeg" }
   ],
   "team_members": {
     "committees": [
@@ -19,7 +80,6 @@
         "lead": { "name": "Sampurna Dan" },
         "members": [
           "Soujash Banerjee",
-          "Arindom Aich",
           "Paromita Nag",
           "Jishan Aich",
           "Subhodeep Ghosh"
@@ -28,8 +88,8 @@
       {
         "id": 2,
         "name": "Ideation + Jury",
-        "lead": { "name": "Subham Kumar" },
-        "members": ["Subham Dey", "Singarapu Pawan Kumar"]
+        "lead": { "name": "Shubham Kumar" },
+        "members": ["Shubham Dey", "Singarapu Pawan Kumar"]
       },
       {
         "id": 3,
@@ -46,14 +106,14 @@
       {
         "id": 5,
         "name": "Venue, Logistics & Hospitality",
-        "lead": { "name": "Indumouly Nandi" },
-        "members": ["Rupa Deka", "Aparesh Mahapatra"]
+        "lead": { "name": "Rukhshar Khatun" },
+        "members": ["Indumouly Nandi", "Rupa Deka", "Aparesh Mahapatra", "Vikash Kumar"]
       },
       {
         "id": 6,
         "name": "Awards and Documentation",
-        "lead": { "name": "Jahir Alam" },
-        "members": ["Rishikant Mallick", "Tanupriya Ameta", "Subhodeep Ghosh"]
+        "lead": { "name": "Arindom Aich" },
+        "members": ["Jahir Alam", "Rishikant Mallick", "Tanupriya Ameta", "Subhodeep Ghosh"]
       }
     ]
   }

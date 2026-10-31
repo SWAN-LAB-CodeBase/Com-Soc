@@ -18,14 +18,9 @@ import { Faq } from "@/components/sections/Faq";
 import { SiteFooter } from "@/components/footer/SiteFooter";
 
 export default function Home() {
-  const applyHref = siteConfig.ideathonFormUrl ?? "#apply";
   return (
     <>
-      <SiteHeader
-        nav={navigation}
-        applyHref={applyHref}
-        applyExternal={Boolean(siteConfig.ideathonFormUrl)}
-      />
+      <SiteHeader nav={navigation} />
       <main id="main" tabIndex={-1}>
         <Hero />
         <ChallengeTopics />

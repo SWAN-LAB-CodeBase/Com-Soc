@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { stagger } from "@/lib/stagger";
 import committee from "@/assets/event_organising_committees.json";
@@ -12,10 +13,20 @@ type Committee = {
   members?: readonly string[];
   subgroups?: readonly Subgroup[];
 };
+type Affiliation = { position: string; institution: string };
 
 export function Organisers() {
-  const organizers = committee.organizers as readonly { name: string; role: string }[];
-  const coordinators = committee.event_coordinators as readonly { name: string }[];
+  const organizers = committee.organizers as readonly {
+    name: string;
+    role: string;
+    photo?: string;
+    affiliations?: readonly Affiliation[];
+    memberships?: string;
+  }[];
+  const coordinators = committee.event_coordinators as readonly {
+    name: string;
+    photo?: string;
+  }[];
   const committees = committee.team_members.committees as readonly Committee[];
 
   return (
@@ -44,11 +55,36 @@ export function Organisers() {
               data-reveal="scale"
               style={stagger(i)}
             >
-              <span className={styles.monogram} aria-hidden="true" data-tone="indigo">
-                {initials(person.name)}
-              </span>
+              {person.photo ? (
+                <span className={styles.portrait} data-tone="indigo">
+                  <Image
+                    src={person.photo}
+                    alt={`Portrait of ${person.name}`}
+                    fill
+                    sizes="3.5rem"
+                    className={styles.portraitImage}
+                  />
+                </span>
+              ) : (
+                <span className={styles.monogram} aria-hidden="true" data-tone="indigo">
+                  {initials(person.name)}
+                </span>
+              )}
               <p className={styles.role}>{person.role}</p>
               <p className={styles.name}>{person.name}</p>
+              {person.affiliations && person.affiliations.length > 0 && (
+                <ul className={styles.affiliations} aria-label={`Affiliations for ${person.name}`}>
+                  {person.affiliations.map((a, idx) => (
+                    <li key={`${a.institution}-${idx}`} className={styles.affiliation}>
+                      <span className={styles.position}>{a.position}</span>
+                      <span className={styles.institution}>{a.institution}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {person.memberships && (
+                <p className={styles.memberships}>{person.memberships}</p>
+              )}
             </li>
           ))}
         </ul>
@@ -69,9 +105,21 @@ export function Organisers() {
               data-reveal="scale"
               style={stagger(i)}
             >
-              <span className={styles.monogram} aria-hidden="true" data-tone="teal">
-                {initials(person.name)}
-              </span>
+              {person.photo ? (
+                <span className={styles.portrait} data-tone="teal">
+                  <Image
+                    src={person.photo}
+                    alt={`Portrait of ${person.name}`}
+                    fill
+                    sizes="3.5rem"
+                    className={styles.portraitImage}
+                  />
+                </span>
+              ) : (
+                <span className={styles.monogram} aria-hidden="true" data-tone="teal">
+                  {initials(person.name)}
+                </span>
+              )}
               <p className={styles.role}>Event coordination</p>
               <p className={styles.name}>{person.name}</p>
             </li>
